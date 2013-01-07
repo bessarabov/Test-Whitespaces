@@ -10,11 +10,11 @@ use Test::Whitespaces::Common;
 sub fix_file {
     my ($filename) = @_;
 
-    my $content = Test::Whitespaces::Common::read_file($filename);
-    my $fixed_content = Test::Whitespaces::Common::get_fixed_text($content);
+    my $content = read_file($filename);
+    my $fixed_content = get_fixed_text($content);
 
     if ($content ne $fixed_content) {
-        Test::Whitespaces::Common::write_file($filename, $fixed_content);
+        write_file($filename, $fixed_content);
     }
 }
 

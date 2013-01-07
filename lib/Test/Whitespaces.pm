@@ -36,8 +36,8 @@ sub check_file {
     my $filename = $File::Find::fullname;
 
     if (-T $filename) {
-        my $content = Test::Whitespaces::Common::read_file($filename);
-        my $fixed_content = Test::Whitespaces::Common::get_fixed_text($content);
+        my $content = read_file($filename);
+        my $fixed_content = get_fixed_text($content);
 
         ok($content eq $fixed_content, "Checking whitespaces in file: '$filename'");
     }

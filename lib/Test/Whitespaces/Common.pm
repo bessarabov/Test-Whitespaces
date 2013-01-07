@@ -5,6 +5,13 @@ use warnings;
 
 use Carp;
 
+our @ISA = qw(Exporter);
+our @EXPORT = qw(
+    read_file
+    write_file
+    get_fixed_text
+);
+
 my $true = 1;
 my $false = 0;
 
