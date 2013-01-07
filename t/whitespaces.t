@@ -1,0 +1,3 @@
+#!perl
+
+use Test::Whitespaces;

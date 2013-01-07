@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Carp;
+
+use Test::Whitespaces::Common;
+
+sub fix_file {
+    my ($filename) = @_;
+
+    my $content = Test::Whitespaces::Common::read_file($filename);
+    my $fixed_content = Test::Whitespaces::Common::get_fixed_text($content);
+
+    if ($content ne $fixed_content) {
+        Test::Whitespaces::Common::write_file($filename, $fixed_content);
+    }
+}
+
+sub main {
+    foreach my $argv (@ARGV) {
+        if (-T $argv) {
+            fix_file($argv);
+        } else {
+            croak "Can't work with file '$argv'";
+        }
+    }
+}
+
+main();
