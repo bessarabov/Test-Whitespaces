@@ -2,8 +2,7 @@ Changes
 MANIFEST
 Makefile.PL
 README
+bin/whiter
 lib/Test/Whitespaces.pm
-t/00-load.t
-t/manifest.t
-t/pod-coverage.t
-t/pod.t
+lib/Test/Whitespaces/Common.pm
+t/get_fixed_text.t

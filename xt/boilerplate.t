@@ -36,8 +36,8 @@ sub module_boilerplate_ok {
     );
 }
 
-TODO: {
-  local $TODO = "Need to replace the boilerplate text";
+SKIP: {
+  skip "Need to replace the boilerplate text", 3;
 
   not_in_file_ok(README =>
     "The README is used..."       => qr/The README is used/,
