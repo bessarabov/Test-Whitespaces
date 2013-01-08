@@ -25,17 +25,40 @@ our $VERSION = '0.01';
 my $true = 1;
 my $false = '';
 
+my $params = {
+    dirs => [
+        "$Bin/../bin",
+        "$Bin/../lib",
+        "$Bin/../t",
+        "$Bin/../xt",
+    ],
+};
+
 =head1 SYNOPSIS
 
 =head1 SUBROUTINES/METHODS
 
 =cut
 
+sub import {
+    my ($class, $args) = @_;
+
+    if (defined $args and ref $args ne "HASH") {
+        croak "Test::Whitespaces expected to recieve hashref with params. Stopped";
+    }
+
+    if (defined $args->{dirs}) {
+        $params->{dirs} = $args->{dirs};
+    }
+
+    main();
+}
+
 sub check_file {
 
     my $filename = $File::Find::fullname;
 
-    if (-T $filename) {
+    if (defined $filename and -T $filename) {
         my $content = read_file($filename);
         my $fixed_content = get_fixed_text($content);
 
@@ -46,19 +69,11 @@ sub check_file {
 
 sub main {
 
-    my @directories_to_search = (
-        "$Bin/../bin",
-        "$Bin/../lib",
-        "$Bin/../t",
-    );
-
-    find({ wanted => \&check_file, follow => 1 }, @directories_to_search);
+    find({ wanted => \&check_file, follow => 1 }, @{$params->{dirs}});
 
     done_testing();
 
 }
-
-main();
 
 =head1 AUTHOR
 

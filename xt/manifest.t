@@ -8,6 +8,8 @@ ok_manifest(
     {
         filter => [
             qr{\.git/},
+            qr{samples_with_whitespaces_errors/},
+            qr{t_failing/},
             qr{xt/},
         ],
     }
