@@ -13,6 +13,10 @@ WriteMakefile(
     PL_FILES            => {},
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM => {
+        'Carp' => 0,
+        'Exporter' => 0,
+        'File::Find' => 0,
+        'FindBin' => 0,
         'Test::More' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
