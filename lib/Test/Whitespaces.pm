@@ -58,7 +58,19 @@ sub check_file {
 
     my $filename = $File::Find::fullname;
 
-    if (defined $filename and -T $filename) {
+    return if not defined $filename;
+
+    my @vcs_dirs = (
+        qr{\.git/},
+        qr{\.hg/},
+        qr{\.svn/},
+    );
+
+    foreach (@vcs_dirs) {
+        return if $filename =~ $_;
+    }
+
+    if (-T $filename) {
         my $content = read_file($filename);
         my $fixed_content = get_fixed_text($content);
 
