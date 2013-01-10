@@ -18,6 +18,7 @@ WriteMakefile(
         'Exporter' => 0,
         'File::Find' => 0,
         'FindBin' => 0,
+        'List::Util' => 0,
         'Test::More' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },

@@ -7,7 +7,7 @@ use Carp;
 use Cwd 'realpath';
 use File::Find;
 use FindBin qw($Bin);
-use Test::More;
+use List::Util qw(max);
 
 use Test::Whitespaces::Common;
 
@@ -35,6 +35,8 @@ my $params = {
     ],
 };
 
+my $current_test = 0;
+
 =head1 SYNOPSIS
 
 =head1 SUBROUTINES/METHODS
@@ -53,6 +55,71 @@ sub import {
     }
 
     main();
+}
+
+# writing custom is() because Test::More::is() output ugly additional info
+sub is {
+    my ($got, $expected, $text) = @_;
+
+    $current_test++;
+
+    if ($got eq $expected) {
+        print "ok $current_test - $text\n";
+    } else {
+        print "not ok $current_test - $text\n";
+        output_diag($got, $expected);
+    }
+}
+
+sub diag {
+    my ($text) = @_;
+
+    my @lines = split /\n/, $text;
+
+    print "# $_\n" foreach @lines;
+}
+
+sub done_testing {
+    print "1..$current_test\n";
+};
+
+sub output_diag {
+    my ($got, $expected) = @_;
+
+    croak "Expected 'got'" if not defined $got;
+    croak "Expected 'expected'" if not defined $expected;
+
+    my @got_lines = split /\n/, $got, -1;
+    my @expected_lines = split /\n/, $expected, -1;
+
+    my $lines_in_file = max(scalar @got_lines, scalar @expected_lines);
+    foreach my $line_number (1 .. $lines_in_file) {
+        my $i = $line_number - 1;
+
+        if (not defined $got_lines[$i]) {
+            # no \n on the last line
+            diag_error_line($line_number-1, $got_lines[$i-1]);
+            next;
+        }
+
+        if (not defined $expected_lines[$i] or ($got_lines[$i] ne $expected_lines[$i])) {
+            # empty lines in the end of file or some problems with whitespaces
+            diag_error_line($line_number, $got_lines[$i] . "\n");
+        }
+    }
+
+}
+
+sub diag_error_line {
+    my ($line_number, $error_line) = @_;
+
+    $error_line =~ s{\t}{\\t}g;
+    $error_line =~ s{\r}{\\r}g;
+    $error_line =~ s{( +)(\n?)$}{"•" x length($1) . $2}eg;
+    $error_line =~ s{\n}{\\n}g;
+
+    diag("L$line_number $error_line");
+
 }
 
 sub check_file {
@@ -80,7 +147,7 @@ sub check_file {
         my $relative_filename = $filename;
         $relative_filename =~ s{^$module_path}{};
 
-        ok($content eq $fixed_content, "whitespaces in $relative_filename");
+        is($content, $fixed_content, "whitespaces in $relative_filename");
     }
 
 }

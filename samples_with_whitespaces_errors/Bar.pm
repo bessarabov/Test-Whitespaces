@@ -1,4 +1,4 @@
-package Bar;
+package Bar; 
 
 # In the sub tabs are used instead of spaces
 sub double {
@@ -15,4 +15,4 @@ sub triple {
 }
 
 # There is no \n in the last line
-1;
+1; 
