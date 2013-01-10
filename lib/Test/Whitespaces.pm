@@ -4,9 +4,10 @@ use warnings;
 use strict;
 
 use Carp;
-use Test::More;
+use Cwd 'realpath';
 use File::Find;
 use FindBin qw($Bin);
+use Test::More;
 
 use Test::Whitespaces::Common;
 
@@ -55,8 +56,7 @@ sub import {
 }
 
 sub check_file {
-
-    my $filename = $File::Find::fullname;
+    my $filename = realpath($File::Find::fullname);
 
     return if not defined $filename;
 
@@ -74,7 +74,11 @@ sub check_file {
         my $content = read_file($filename);
         my $fixed_content = get_fixed_text($content);
 
-        ok($content eq $fixed_content, "Checking whitespaces in file: '$filename'");
+        my $module_path = realpath("$Bin/..") . "/";
+        my $relative_filename = $filename;
+        $relative_filename =~ s{^$module_path}{};
+
+        ok($content eq $fixed_content, "Checking whitespaces in file: '$relative_filename'");
     }
 
 }

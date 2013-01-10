@@ -14,6 +14,7 @@ WriteMakefile(
     EXE_FILES    => [ grep { /\w$/ } glob("bin/*") ],
     PREREQ_PM => {
         'Carp' => 0,
+        'Cwd' => 0,
         'Exporter' => 0,
         'File::Find' => 0,
         'FindBin' => 0,
