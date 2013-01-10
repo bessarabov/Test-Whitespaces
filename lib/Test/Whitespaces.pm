@@ -56,9 +56,11 @@ sub import {
 }
 
 sub check_file {
-    my $filename = realpath($File::Find::fullname);
+    my $filename = $File::Find::fullname;
 
     return if not defined $filename;
+
+    $filename = realpath($filename);
 
     my @vcs_dirs = (
         qr{\.git/},
