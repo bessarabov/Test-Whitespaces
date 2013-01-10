@@ -78,7 +78,7 @@ sub check_file {
         my $relative_filename = $filename;
         $relative_filename =~ s{^$module_path}{};
 
-        ok($content eq $fixed_content, "Checking whitespaces in file: '$relative_filename'");
+        ok($content eq $fixed_content, "whitespaces in $relative_filename");
     }
 
 }
