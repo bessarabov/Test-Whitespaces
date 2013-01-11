@@ -67,23 +67,15 @@ sub is {
         print "ok $current_test - $text\n";
     } else {
         print "not ok $current_test - $text\n";
-        output_diag($got, $expected);
+        output_diff($got, $expected);
     }
-}
-
-sub diag {
-    my ($text) = @_;
-
-    my @lines = split /\n/, $text;
-
-    print "# $_\n" foreach @lines;
 }
 
 sub done_testing {
     print "1..$current_test\n";
 };
 
-sub output_diag {
+sub output_diff {
     my ($got, $expected) = @_;
 
     croak "Expected 'got'" if not defined $got;
@@ -92,25 +84,39 @@ sub output_diag {
     my @got_lines = split /\n/, $got, -1;
     my @expected_lines = split /\n/, $expected, -1;
 
+    my %error_lines;    # key - line number, value - line content
+
     my $lines_in_file = max(scalar @got_lines, scalar @expected_lines);
     foreach my $line_number (1 .. $lines_in_file) {
         my $i = $line_number - 1;
 
         if (not defined $got_lines[$i]) {
             # no \n on the last line
-            diag_error_line($line_number-1, $got_lines[$i-1]);
+            $error_lines{$line_number-1} = $got_lines[$i-1];
             next;
         }
 
         if (not defined $expected_lines[$i] or ($got_lines[$i] ne $expected_lines[$i])) {
             # empty lines in the end of file or some problems with whitespaces
-            diag_error_line($line_number, $got_lines[$i] . "\n");
+            $error_lines{$line_number} = $got_lines[$i] . "\n";
         }
+    }
+
+    my $previous_line_number = 0;
+    foreach my $line_number (sort {$a <=> $b} keys %error_lines) {
+
+        if ($previous_line_number + 1 != $line_number) {
+            print "# ...\n";
+        }
+
+        output_error_line($line_number, $error_lines{$line_number});
+
+        $previous_line_number = $line_number;
     }
 
 }
 
-sub diag_error_line {
+sub output_error_line {
     my ($line_number, $error_line) = @_;
 
     $error_line =~ s{\t}{\\t}g;
@@ -118,8 +124,7 @@ sub diag_error_line {
     $error_line =~ s{( +)(\n?)$}{"•" x length($1) . $2}eg;
     $error_line =~ s{\n}{\\n}g;
 
-    diag("L$line_number $error_line");
-
+    print "# L$line_number $error_line\n";
 }
 
 sub check_file {
