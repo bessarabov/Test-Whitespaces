@@ -9,8 +9,6 @@ use File::Find;
 use FindBin qw($Bin);
 use List::Util qw(max);
 
-use Test::Whitespaces::Common;
-
 =head1 NAME
 
 Test::Whitespaces - Test source code for errors in whitespaces
@@ -54,7 +52,61 @@ sub import {
         $params->{dirs} = $args->{dirs};
     }
 
-    main();
+    if (not $args->{_only_load}) {
+        main();
+    }
+}
+
+sub _read_file {
+    my ($filename) = @_;
+
+    open FILE, "<", $filename or croak "Can't open file '$filename': $!";
+    my @lines = <FILE>;
+    close FILE;
+
+    my $content = join '', @lines;
+
+    return $content;
+}
+
+sub _write_file {
+    my ($filename, $content) = @_;
+
+    open FILE, ">", $filename or croak "Can't open file '$filename': $!";
+    print FILE $content;
+    close FILE;
+
+    return $false;
+}
+
+sub _get_fixed_text {
+    my ($original_text) = @_;
+
+    my $fixed_text;
+
+    my @lines = split(/\n/, $original_text);
+
+    foreach my $line (@lines) {
+        $line =~ s{\t}{    }g;
+        $line =~ s{\s*$}{\n};
+        $fixed_text .= $line;
+    }
+
+    $fixed_text .= "\n";
+    $fixed_text =~ s{\s*$}{\n};
+
+    return $fixed_text;
+}
+
+sub _fix_file {
+    my ($filename) = @_;
+
+    my $content = _read_file($filename);
+    my $fixed_content = _get_fixed_text($content);
+
+    if ($content ne $fixed_content) {
+        _write_file($filename, $fixed_content);
+    }
 }
 
 # writing custom is() because Test::More::is() output ugly additional info
@@ -145,8 +197,8 @@ sub check_file {
     }
 
     if (-T $filename) {
-        my $content = read_file($filename);
-        my $fixed_content = get_fixed_text($content);
+        my $content = _read_file($filename);
+        my $fixed_content = _get_fixed_text($content);
 
         my $module_path = realpath("$Bin/..") . "/";
         my $relative_filename = $filename;

@@ -4,5 +4,5 @@ Makefile.PL
 README
 bin/whiter
 lib/Test/Whitespaces.pm
-lib/Test/Whitespaces/Common.pm
+t/00-load.t
 t/get_fixed_text.t

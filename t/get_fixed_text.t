@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 use Test::More;
-use Test::Whitespaces::Common;
+
+use Test::Whitespaces { _only_load => 1 };
 
 my @test_cases = (
     {
@@ -63,7 +64,7 @@ my @test_cases = (
 
 foreach (@test_cases) {
     is(
-        get_fixed_text($_->{got}),
+        Test::Whitespaces::_get_fixed_text($_->{got}),
         $_->{expected},
         "get_fixed_text()",
     );
