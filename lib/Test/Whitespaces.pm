@@ -119,7 +119,7 @@ sub is {
         print "ok $current_test - $text\n";
     } else {
         print "not ok $current_test - $text\n";
-        output_diff($got, $expected);
+        print _get_diff($got, $expected);
     }
 }
 
@@ -127,11 +127,17 @@ sub done_testing {
     print "1..$current_test\n";
 };
 
-sub output_diff {
+sub _get_diff {
     my ($got, $expected) = @_;
 
     croak "Expected 'got'" if not defined $got;
     croak "Expected 'expected'" if not defined $expected;
+
+    if ($got eq "") {
+        return "# L1\n";
+    }
+
+    my $diff = '';
 
     my @got_lines = split /\n/, $got, -1;
     my @expected_lines = split /\n/, $expected, -1;
@@ -158,25 +164,28 @@ sub output_diff {
     foreach my $line_number (sort {$a <=> $b} keys %error_lines) {
 
         if ($previous_line_number + 1 != $line_number) {
-            print "# ...\n";
+            $diff .= "# ...\n";
         }
 
-        output_error_line($line_number, $error_lines{$line_number});
+        $diff .= _get_diff_line($line_number, $error_lines{$line_number});
 
         $previous_line_number = $line_number;
     }
 
+    return $diff;
 }
 
-sub output_error_line {
+sub _get_diff_line {
     my ($line_number, $error_line) = @_;
+
+    return "# L$line_number\n" if not defined $error_line;
 
     $error_line =~ s{\t}{\\t}g;
     $error_line =~ s{\r}{\\r}g;
     $error_line =~ s{( +)(\n?)$}{"•" x length($1) . $2}eg;
     $error_line =~ s{\n}{\\n}g;
 
-    print "# L$line_number $error_line\n";
+    return "# L$line_number $error_line\n";
 }
 
 sub check_file {

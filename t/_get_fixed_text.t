@@ -66,7 +66,7 @@ foreach (@test_cases) {
     is(
         Test::Whitespaces::_get_fixed_text($_->{got}),
         $_->{expected},
-        "get_fixed_text()",
+        "_get_fixed_text()",
     );
 }
 

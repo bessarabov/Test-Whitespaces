@@ -5,4 +5,5 @@ README
 bin/whiter
 lib/Test/Whitespaces.pm
 t/00-load.t
-t/get_fixed_text.t
+t/_get_diff.t
+t/_get_fixed_text.t
