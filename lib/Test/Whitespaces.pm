@@ -53,9 +53,9 @@ sub import {
     }
 
     if (not $args->{_only_load}) {
-        check_dir($_) foreach @{$args->{dirs}};
-        check_file($_) foreach @{$args->{files}};
-        done_testing();
+        _check_dir($_) foreach @{$args->{dirs}};
+        _check_file($_) foreach @{$args->{files}};
+        _done_testing();
     }
 }
 
@@ -111,8 +111,8 @@ sub _fix_file {
     }
 }
 
-# writing custom is() because Test::More::is() output ugly additional info
-sub is {
+# writing custom _is() because Test::More::is() output ugly additional info
+sub _is {
     my ($got, $expected, $text) = @_;
 
     $current_test++;
@@ -125,7 +125,7 @@ sub is {
     }
 }
 
-sub done_testing {
+sub _done_testing {
     print "1..$current_test\n";
 };
 
@@ -190,19 +190,19 @@ sub _get_diff_line {
     return "# L$line_number $error_line\n";
 }
 
-sub check_dir {
+sub _check_dir {
     my ($dir) = @_;
 
     find(
         {
-            wanted => sub { check_file($File::Find::fullname) },
+            wanted => sub { _check_file($File::Find::fullname) },
             follow => 1,
         },
         $dir,
     );
 }
 
-sub check_file {
+sub _check_file {
     my ($filename) = @_;
 
     return if not defined $filename;
@@ -227,7 +227,7 @@ sub check_file {
         my $relative_filename = $filename;
         $relative_filename =~ s{^$module_path}{};
 
-        is($content, $fixed_content, "whitespaces in $relative_filename");
+        _is($content, $fixed_content, "whitespaces in $relative_filename");
     }
 
 }

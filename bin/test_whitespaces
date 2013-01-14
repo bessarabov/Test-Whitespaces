@@ -11,9 +11,9 @@ use Test::Whitespaces { _only_load => 1 };
 sub main {
     foreach my $argv (@ARGV) {
         if (-d $argv) {
-            Test::Whitespaces::check_dir($argv);
+            Test::Whitespaces::_check_dir($argv);
         } elsif (-T $argv) {
-            Test::Whitespaces::check_file($argv);
+            Test::Whitespaces::_check_file($argv);
         } else {
             print
                 RED
