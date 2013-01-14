@@ -28,7 +28,7 @@ my $current_test = 0;
 
 =head1 SYNOPSIS
 
-=head1 SUBROUTINES/METHODS
+=head1 SUBROUTINES
 
 =cut
 
@@ -58,6 +58,24 @@ sub import {
         _done_testing();
     }
 }
+
+# writing custom _is() because Test::More::is() output ugly additional info
+sub _is {
+    my ($got, $expected, $text) = @_;
+
+    $current_test++;
+
+    if ($got eq $expected) {
+        print "ok $current_test - $text\n";
+    } else {
+        print "not ok $current_test - $text\n";
+        print _get_diff($got, $expected);
+    }
+}
+
+sub _done_testing {
+    print "1..$current_test\n";
+};
 
 sub _read_file {
     my ($filename) = @_;
@@ -99,35 +117,6 @@ sub _get_fixed_text {
 
     return $fixed_text;
 }
-
-sub _fix_file {
-    my ($filename) = @_;
-
-    my $content = _read_file($filename);
-    my $fixed_content = _get_fixed_text($content);
-
-    if ($content ne $fixed_content) {
-        _write_file($filename, $fixed_content);
-    }
-}
-
-# writing custom _is() because Test::More::is() output ugly additional info
-sub _is {
-    my ($got, $expected, $text) = @_;
-
-    $current_test++;
-
-    if ($got eq $expected) {
-        print "ok $current_test - $text\n";
-    } else {
-        print "not ok $current_test - $text\n";
-        print _get_diff($got, $expected);
-    }
-}
-
-sub _done_testing {
-    print "1..$current_test\n";
-};
 
 sub _get_diff {
     my ($got, $expected) = @_;
@@ -190,24 +179,8 @@ sub _get_diff_line {
     return "# L$line_number $error_line\n";
 }
 
-sub _check_dir {
-    my ($dir) = @_;
-
-    find(
-        {
-            wanted => sub { _check_file($File::Find::fullname) },
-            follow => 1,
-        },
-        $dir,
-    );
-}
-
-sub _check_file {
+sub _file_is_in_vcs_index {
     my ($filename) = @_;
-
-    return if not defined $filename;
-
-    $filename = realpath($filename);
 
     my @vcs_dirs = (
         qr{\.git/},
@@ -216,8 +189,19 @@ sub _check_file {
     );
 
     foreach (@vcs_dirs) {
-        return if $filename =~ $_;
+        return $true if $filename =~ $_;
     }
+
+    return $false;
+}
+
+sub _check_file {
+    my ($filename) = @_;
+
+    return if not defined $filename;
+    return if _file_is_in_vcs_index($filename);
+
+    $filename = realpath($filename);
 
     if (-T $filename) {
         my $content = _read_file($filename);
@@ -230,6 +214,46 @@ sub _check_file {
         _is($content, $fixed_content, "whitespaces in $relative_filename");
     }
 
+}
+
+sub _check_dir {
+    my ($dir) = @_;
+
+    find(
+        {
+            wanted => sub { _check_file($File::Find::fullname) },
+            follow => 1,
+        },
+        $dir,
+    );
+}
+
+sub _fix_file {
+    my ($filename) = @_;
+
+    return if not defined $filename;
+    return if _file_is_in_vcs_index($filename);
+
+    if (-T $filename) {
+        my $content = _read_file($filename);
+        my $fixed_content = _get_fixed_text($content);
+
+        if ($content ne $fixed_content) {
+            _write_file($filename, $fixed_content);
+        }
+    }
+}
+
+sub _fix_dir {
+    my ($dir) = @_;
+
+    find(
+        {
+            wanted => sub { _fix_file($File::Find::fullname) },
+            follow => 1,
+        },
+        $dir,
+    );
 }
 
 =head1 AUTHOR

@@ -3,16 +3,23 @@
 use strict;
 use warnings;
 
-use Carp;
+use Term::ANSIColor qw(:constants);
 
 use Test::Whitespaces { _only_load => 1 };
 
 sub main {
     foreach my $argv (@ARGV) {
-        if (-T $argv) {
+        if (-d $argv) {
+            Test::Whitespaces::_fix_dir($argv);
+        } elsif (-T $argv) {
             Test::Whitespaces::_fix_file($argv);
         } else {
-            croak "Can't work with file '$argv'";
+            print
+                RED
+                . "Fatal error. '$argv' is not a directory and it is not a text file.\n"
+                . RESET
+                ;
+            exit 1;
         }
     }
 }
