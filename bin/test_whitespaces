@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Term::ANSIColor qw(:constants);
+use Carp;
+
+use Test::Whitespaces { _only_load => 1 };
+
+sub main {
+    foreach my $argv (@ARGV) {
+        if (-d $argv) {
+            Test::Whitespaces::check_dir($argv);
+        } elsif (-T $argv) {
+            Test::Whitespaces::check_file($argv);
+        } else {
+            print
+                RED
+                . "Fatal error. '$argv' is not a directory and it is not a text file.\n"
+                . RESET
+                ;
+            exit 1;
+        }
+    }
+}
+
+main();

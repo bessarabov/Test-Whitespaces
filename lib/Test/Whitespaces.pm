@@ -24,15 +24,6 @@ our $VERSION = '0.01';
 my $true = 1;
 my $false = '';
 
-my $params = {
-    dirs => [
-        "$Bin/../bin",
-        "$Bin/../lib",
-        "$Bin/../t",
-        "$Bin/../xt",
-    ],
-};
-
 my $current_test = 0;
 
 =head1 SYNOPSIS
@@ -48,12 +39,23 @@ sub import {
         croak "Test::Whitespaces expected to recieve hashref with params. Stopped";
     }
 
-    if (defined $args->{dirs}) {
-        $params->{dirs} = $args->{dirs};
+    if (not defined $args->{dirs}) {
+        $args->{dirs} = [
+            "$Bin/../bin",
+            "$Bin/../lib",
+            "$Bin/../t",
+            "$Bin/../xt",
+        ],
+    }
+
+    if (not defined $args->{files}) {
+        $args->{files} = [];
     }
 
     if (not $args->{_only_load}) {
-        main();
+        check_dir($_) foreach @{$args->{dirs}};
+        check_file($_) foreach @{$args->{files}};
+        done_testing();
     }
 }
 
@@ -188,8 +190,20 @@ sub _get_diff_line {
     return "# L$line_number $error_line\n";
 }
 
+sub check_dir {
+    my ($dir) = @_;
+
+    find(
+        {
+            wanted => sub { check_file($File::Find::fullname) },
+            follow => 1,
+        },
+        $dir,
+    );
+}
+
 sub check_file {
-    my $filename = $File::Find::fullname;
+    my ($filename) = @_;
 
     return if not defined $filename;
 
@@ -215,14 +229,6 @@ sub check_file {
 
         is($content, $fixed_content, "whitespaces in $relative_filename");
     }
-
-}
-
-sub main {
-
-    find({ wanted => \&check_file, follow => 1 }, @{$params->{dirs}});
-
-    done_testing();
 
 }
 

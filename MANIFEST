@@ -2,6 +2,7 @@ Changes
 MANIFEST
 Makefile.PL
 README
+bin/test_whitespaces
 bin/whiter
 lib/Test/Whitespaces.pm
 t/00-load.t

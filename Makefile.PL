@@ -20,6 +20,7 @@ WriteMakefile(
         'FindBin' => 0,
         'List::Util' => 0,
         'Test::More' => 0,
+        'Term::ANSIColor' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Test-Whitespaces-*' },
