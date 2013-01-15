@@ -25,6 +25,7 @@ my $true = 1;
 my $false = '';
 
 my $current_test = 0;
+my @ignore;
 
 =head1 SYNOPSIS
 
@@ -37,6 +38,15 @@ sub import {
 
     if (defined $args and ref $args ne "HASH") {
         croak "Test::Whitespaces expected to recieve hashref with params. Stopped";
+    }
+
+    if (defined $args->{ignore}) {
+        croak "Parameter 'ignore' shoud contain ARRAY" if ref $args->{ignore} ne "ARRAY";
+
+        foreach (@{$args->{ignore}}) {
+            croak "Parameter 'ignore' shoud contain ARRAY with Regexp-es" if ref $_ ne "Regexp";
+            push @ignore, $_;
+        }
     }
 
     if (not defined $args->{dirs}) {
@@ -216,6 +226,10 @@ sub _check_file {
 
     if (-T $filename) {
         return if _file_is_in_vcs_index($filename);
+
+        foreach my $regexp (@ignore) {
+            return if $filename =~ $regexp;
+        }
 
         my $content = _read_file($filename);
         my $fixed_content = _get_fixed_text($content);
