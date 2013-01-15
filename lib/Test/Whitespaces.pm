@@ -182,14 +182,26 @@ sub _get_diff_line {
 sub _file_is_in_vcs_index {
     my ($filename) = @_;
 
-    my @vcs_dirs = (
-        qr{\.git/},
-        qr{\.hg/},
-        qr{\.svn/},
+    if (-d $filename) {
+        croak "Internal error. $filename is dir. It can't happen.";
+    }
+
+    if (not -T $filename) {
+        croak "Internal error. $filename is not a text file. It can't happen.";
+    }
+
+    my @vcs_dirs = qw(
+        .git
+        .hg
+        .svn
     );
 
-    foreach (@vcs_dirs) {
-        return $true if $filename =~ $_;
+    my @parts = split "/", $filename;
+
+    foreach my $part (@parts) {
+        foreach my $vcs (@vcs_dirs) {
+            return $true if $part eq $vcs;
+        }
     }
 
     return $false;
@@ -199,11 +211,12 @@ sub _check_file {
     my ($filename) = @_;
 
     return if not defined $filename;
-    return if _file_is_in_vcs_index($filename);
 
     $filename = realpath($filename);
 
     if (-T $filename) {
+        return if _file_is_in_vcs_index($filename);
+
         my $content = _read_file($filename);
         my $fixed_content = _get_fixed_text($content);
 
@@ -232,9 +245,10 @@ sub _fix_file {
     my ($filename) = @_;
 
     return if not defined $filename;
-    return if _file_is_in_vcs_index($filename);
 
     if (-T $filename) {
+        return if _file_is_in_vcs_index($filename);
+
         my $content = _read_file($filename);
         my $fixed_content = _get_fixed_text($content);
 
