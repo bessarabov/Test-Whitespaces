@@ -4,10 +4,11 @@ use warnings;
 use strict;
 
 use Carp;
-use Cwd 'realpath';
+use Cwd qw(realpath);
 use File::Find;
 use FindBin qw($Bin);
 use List::Util qw(max);
+use Term::ANSIColor qw(:constants);
 
 =head1 NAME
 
@@ -66,6 +67,33 @@ sub import {
         _check_dir($_) foreach @{$args->{dirs}};
         _check_file($_) foreach @{$args->{files}};
         _done_testing();
+    }
+}
+
+sub _run_script {
+    my (%args) = @_;
+
+    if (not defined $args{dir}) {
+        croak "_run_script expected to recieve param 'dir'. Stopped";
+    }
+
+    if (not defined $args{file}) {
+        croak "_run_script expected to recieve param 'file'. Stopped";
+    }
+
+    foreach my $argv (@{$args{argv}}) {
+        if (-d $argv) {
+            $args{dir}->($argv);
+        } elsif (-T $argv) {
+            $args{file}->($argv);
+        } else {
+            print
+                RED
+                . "Fatal error. '$argv' is not a directory and it is not a text file.\n"
+                . RESET
+                ;
+            exit 1;
+        }
     }
 }
 
