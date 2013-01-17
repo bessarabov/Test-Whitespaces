@@ -6,7 +6,8 @@ use warnings;
 use Test::Whitespaces { _only_load => 1 };
 
 Test::Whitespaces::_run_script(
+    script => 'test_whitespaces',
     dir => \&Test::Whitespaces::_check_dir,
-    file => \&Test::Whitespaces::_ckeck_file,
+    file => \&Test::Whitespaces::_check_file,
     argv => \@ARGV,
 );

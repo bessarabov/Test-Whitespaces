@@ -26,6 +26,7 @@ my $true = 1;
 my $false = '';
 
 my $current_test = 0;
+my $verbose = $false;
 my @ignore;
 
 =head1 SYNOPSIS
@@ -81,7 +82,41 @@ sub _run_script {
         croak "_run_script expected to recieve param 'file'. Stopped";
     }
 
+    if (not defined $args{script}) {
+        croak "_run_script expected to recieve param 'script'. Stopped";
+    }
+
+    my @to_check;
+    my $seen_two_minuses = $false;
+
     foreach my $argv (@{$args{argv}}) {
+
+        if ($argv eq '--') {
+            $seen_two_minuses = $true;
+            next;
+        }
+
+        if (not $seen_two_minuses) {
+            if ($argv eq '--help') {
+                croak "Unimplemented"; # TODO bes
+                exit 0;
+            }
+
+            if ($argv eq '--version') {
+                print "$args{script} $VERSION\n";
+                exit 0;
+            }
+
+            if ($args{script} eq 'whiter' and $argv eq '--verbose') {
+                $verbose = $true;
+                next;
+            }
+        }
+
+        push @to_check, $argv;
+    }
+
+    foreach my $argv (@to_check) {
         if (-d $argv) {
             $args{dir}->($argv);
         } elsif (-T $argv) {
@@ -296,6 +331,9 @@ sub _fix_file {
 
         if ($content ne $fixed_content) {
             _write_file($filename, $fixed_content);
+            print "Repairing $filename\n" if $verbose;
+        } else {
+            print "File is correct $filename\n" if $verbose;
         }
     }
 }
