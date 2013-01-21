@@ -43,10 +43,10 @@ sub import {
     }
 
     if (defined $args->{ignore}) {
-        croak "Parameter 'ignore' shoud contain ARRAY" if ref $args->{ignore} ne "ARRAY";
+        croak "Parameter 'ignore' shoud contain ARRAY. Stopped" if ref $args->{ignore} ne "ARRAY";
 
         foreach (@{$args->{ignore}}) {
-            croak "Parameter 'ignore' shoud contain ARRAY with Regexp-es" if ref $_ ne "Regexp";
+            croak "Parameter 'ignore' shoud contain ARRAY with Regexp-es. Stopped" if ref $_ ne "Regexp";
             push @ignore, $_;
         }
     }
@@ -98,7 +98,7 @@ sub _run_script {
 
         if (not $seen_two_minuses) {
             if ($argv eq '--help') {
-                croak "Unimplemented"; # TODO bes
+                croak "Unimplemented. Stopped"; # TODO bes
                 exit 0;
             }
 
@@ -153,7 +153,7 @@ sub _done_testing {
 sub _read_file {
     my ($filename) = @_;
 
-    open FILE, "<", $filename or croak "Can't open file '$filename': $!";
+    open FILE, "<", $filename or croak "Can't open file '$filename': $!. Stopped";
     my @lines = <FILE>;
     close FILE;
 
@@ -165,7 +165,7 @@ sub _read_file {
 sub _write_file {
     my ($filename, $content) = @_;
 
-    open FILE, ">", $filename or croak "Can't open file '$filename': $!";
+    open FILE, ">", $filename or croak "Can't open file '$filename': $!. Stopped";
     print FILE $content;
     close FILE;
 
@@ -194,8 +194,8 @@ sub _get_fixed_text {
 sub _get_diff {
     my ($got, $expected) = @_;
 
-    croak "Expected 'got'" if not defined $got;
-    croak "Expected 'expected'" if not defined $expected;
+    croak "Expected 'got'. Stopped" if not defined $got;
+    croak "Expected 'expected'. Stopped" if not defined $expected;
 
     if ($got eq "") {
         return "# L1\n";
@@ -256,11 +256,11 @@ sub _file_is_in_vcs_index {
     my ($filename) = @_;
 
     if (-d $filename) {
-        croak "Internal error. $filename is dir. It can't happen.";
+        croak "Internal error. $filename is dir. It can't happen. Stopped";
     }
 
     if (not -T $filename) {
-        croak "Internal error. $filename is not a text file. It can't happen.";
+        croak "Internal error. $filename is not a text file. It can't happen. Stopped";
     }
 
     my @vcs_dirs = qw(
