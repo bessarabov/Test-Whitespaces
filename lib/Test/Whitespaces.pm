@@ -270,6 +270,7 @@ sub _file_is_in_vcs_index {
     );
 
     my @parts = split "/", $filename;
+    pop @parts; # last element is filename, but we need only directories
 
     foreach my $part (@parts) {
         foreach my $vcs (@vcs_dirs) {
