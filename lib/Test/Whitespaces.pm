@@ -72,11 +72,11 @@ More complex usage can be found in SYNOPSIS section.
 This module does not check the files that are stored in the version control
 system directories (you remember, that .git, .svn and friends).
 
-This module is shiped with 2 scripts. `L<test_whitespaces>` script to easy
-check files and directories and `L<whiter>` to fix all that errors.
+This module is shiped with 2 scripts. `L<test_whitespaces>` to easy check
+files and directories and `L<whiter>` to fix all that errors.
 
 And by the way, this module don't have any dependencies, but Perl. It does not
-mutter much, but it is nice.
+matter much, but it is nice =)
 
 =head1 AUTHOR
 
@@ -84,7 +84,7 @@ Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
 
 =head1 SOURCE CODE
 
-The source code for this script is hosted on GitHub
+The source code for this module and scripts is hosted on GitHub
 L<https://github.com/bessarabov/Test-Whitespaces>
 
 =cut
@@ -114,12 +114,6 @@ my $false = '';
 my $current_test = 0;
 my $verbose = $false;
 my @ignore;
-
-=head1 SYNOPSIS
-
-=head1 SUBROUTINES
-
-=cut
 
 sub import {
     my ($class, $args) = @_;
