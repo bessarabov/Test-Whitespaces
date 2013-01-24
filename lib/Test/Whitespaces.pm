@@ -9,14 +9,100 @@ use File::Find;
 use FindBin qw($Bin);
 use List::Util qw(max);
 use Term::ANSIColor qw(:constants);
+use Pod::Usage;
+
+=encoding UTF-8
 
 =head1 NAME
 
-Test::Whitespaces - Test source code for errors in whitespaces
+Test::Whitespaces - test source code for errors in whitespaces
 
 =head1 VERSION
 
 Version 0.01
+
+=head1 SYNOPSIS
+
+In xt/whitespaces.t:
+
+    use Test::Whitespaces;
+
+Running this test will check all files with the source code in the directories
+bin, lib, t and xt for errors in whitespaces. It will pretty print all the
+errors, so it is easy to fix them (by the way, this module ships with a script
+`L<whiter>` that can automaticly fix all the errors).
+
+You can also customize the test. All parameters are optional.
+
+    use Test::Whitespaces {
+        dirs => [ 'script', 'lib' ], # Directories to check all the files from
+        files => [ 'README' ],       # Additional files to check
+        ignore => [ qr{\.bak$} ],    # Array with regexpex. Files that matches
+                                     # that regexp are not checked
+    };
+
+=head2 DESCRIPTION
+
+This module is intend to solve one simple task: to make sure that your source
+code don't have problems with whitespaces.
+
+This module checks that all the rules are followed.
+
+=over
+
+=item * Each line ends with "\n" (including the last line)
+
+=item * For new lines "\n" is used (not "\r\n")
+
+=item * There are no ending spaces on the lines
+
+=item * 4 spaces are used instead of tabs
+
+=item * No empty lines in the end of file
+
+=back
+
+This module don't export any subroutines, you only need to write a test file
+and write there:
+
+    use Test::Whitespaces;
+
+More complex usage can be found in SYNOPSIS section.
+
+This module does not check the files that are stored in the version control
+system directories (you remember, that .git, .svn and friends).
+
+This module is shiped with 2 scripts. `L<test_whitespaces>` script to easy
+check files and directories and `L<whiter>` to fix all that errors.
+
+And by the way, this module don't have any dependencies, but Perl. It does not
+mutter much, but it is nice.
+
+=head1 AUTHOR
+
+Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
+
+=head1 SOURCE CODE
+
+The source code for this script is hosted on GitHub
+L<https://github.com/bessarabov/Test-Whitespaces>
+
+=cut
+
+=head1 BUGS
+
+Please report any bugs or feature requests in GitHub Issues
+L<https://github.com/bessarabov/Test-Whitespaces/issues>
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2013 Ivan Bessarabov.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
@@ -98,8 +184,9 @@ sub _run_script {
 
         if (not $seen_two_minuses) {
             if ($argv eq '--help') {
-                croak "Unimplemented. Stopped"; # TODO bes
-                exit 0;
+                pod2usage({
+                    -exitval => 0,
+                });
             }
 
             if ($argv eq '--version') {
@@ -350,31 +437,5 @@ sub _fix_dir {
         $dir,
     );
 }
-
-=head1 AUTHOR
-
-Ivan Bessarabov, C<< <ivan at bessarabov.ru> >>
-
-=head1 SOURCE CODE
-
-The source code for this module is hosted on GitHub
-L<https://github.com/bessarabov/Test-Whitespaces>
-
-=head1 BUGS
-
-Please report any bugs or feature requests in GitHub Issues
-L<https://github.com/bessarabov/Test-Whitespaces/issues>
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2013 Ivan Bessarabov.
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
-
-=cut
 
 1;

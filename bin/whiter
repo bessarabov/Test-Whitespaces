@@ -1,5 +1,49 @@
 #!/usr/bin/perl
 
+=encoding UTF-8
+
+=head1 NAME
+
+whiter - script to fix whitespaces errors in files
+
+=head1 SYNOPSIS
+
+whiter [FILEs or DIRs or both]
+
+ Options:
+
+      --verbose         Scrip show filenames that are fixed
+      --help            Show this message
+      --version         Show version number
+
+Script will work on text files that are specified as the parameters or are
+situated in the specified diretories.
+
+Script will check if all the rules are followed. In case if something is wrong
+the script will fix the file.
+
+ * Each line ends with "\n" (including the last line)
+ * For new lines "\n" is used (not "\r\n")
+ * There are no ending spaces on the lines
+ * 4 spaces are used instead of tabs
+ * No empty lines in the end of file
+
+There is also a script `L<test_whitespaces>` that checks all that ruls and there
+is a Perl module L<Test::Whitespaces> that can be used to test your source code.
+
+Project url: L<https://github.com/bessarabov/Test-Whitespaces>
+
+=head1 AUTHOR
+
+Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
+
+=head1 SOURCE CODE
+
+The source code for this script is hosted on GitHub
+L<https://github.com/bessarabov/Test-Whitespaces>
+
+=cut
+
 use strict;
 use warnings;
 
