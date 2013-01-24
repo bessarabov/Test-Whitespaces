@@ -197,6 +197,11 @@ sub _run_script {
         push @to_check, $argv;
     }
 
+    unless (@to_check) {
+        print "No. Run me with some parameters, please.\n";
+        exit 1;
+    }
+
     foreach my $argv (@to_check) {
         if (-d $argv) {
             $args{dir}->($argv);
