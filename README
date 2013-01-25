@@ -51,6 +51,14 @@ SYNOPSIS
     And by the way, this module don't have any dependencies, but Perl. It
     does not matter much, but it is nice =)
 
+SEE ALSO
+    If this module is not what you need, you may try to look to these
+    modules (but I hope you will prefer to use Test::Whitespaces):
+
+    * Test::EOL
+    * Test::NoTabs
+    * Test::TrailingSpace
+
 AUTHOR
     Ivan Bessarabov, `<ivan@bessarabov.ru>'
 

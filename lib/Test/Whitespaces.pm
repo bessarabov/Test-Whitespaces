@@ -78,6 +78,21 @@ files and directories and `L<whiter>` to fix all that errors.
 And by the way, this module don't have any dependencies, but Perl. It does not
 matter much, but it is nice =)
 
+=head1 SEE ALSO
+
+If this module is not what you need, you may try to look to these modules (but
+I hope you will prefer to use Test::Whitespaces):
+
+=over
+
+=item * L<Test::EOL>
+
+=item * L<Test::NoTabs>
+
+=item * L<Test::TrailingSpace>
+
+=back
+
 =head1 AUTHOR
 
 Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
@@ -93,6 +108,7 @@ L<https://github.com/bessarabov/Test-Whitespaces>
 
 Please report any bugs or feature requests in GitHub Issues
 L<https://github.com/bessarabov/Test-Whitespaces/issues>
+
 
 =head1 LICENSE AND COPYRIGHT
 
