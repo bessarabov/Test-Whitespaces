@@ -22,14 +22,23 @@ situated in the specified diretories.
 Script will check if all the rules are followed. In case if something is wrong
 the script will fix the file.
 
- * Each line ends with "\n" (including the last line)
- * For new lines "\n" is used (not "\r\n")
- * There are no ending spaces on the lines
- * 4 spaces are used instead of tabs
- * No empty lines in the end of file
+=over
 
-There is also a script `L<test_whitespaces>` that checks all that ruls and there
-is a Perl module L<Test::Whitespaces> that can be used to test your source code.
+=item * Each line ends with "\n" (including the last line)
+
+=item * For new lines "\n" is used (not "\r\n")
+
+=item * There are no ending spaces on the lines
+
+=item * 4 spaces are used instead of tabs
+
+=item * No empty lines in the end of file
+
+=back
+
+There is also a script `L<test_whitespaces>` that checks all that ruls and
+there is a Perl module L<Test::Whitespaces> that can be used to test your
+source code.
 
 Project url: L<https://github.com/bessarabov/Test-Whitespaces>
 

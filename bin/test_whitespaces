@@ -20,11 +20,19 @@ situated in the specified diretories.
 
 Script will check if all the rules are followed.
 
- * Each line ends with "\n" (including the last line)
- * For new lines "\n" is used (not "\r\n")
- * There are no ending spaces on the lines
- * 4 spaces are used instead of tabs
- * No empty lines in the end of file
+=over
+
+=item * Each line ends with "\n" (including the last line)
+
+=item * For new lines "\n" is used (not "\r\n")
+
+=item * There are no ending spaces on the lines
+
+=item * 4 spaces are used instead of tabs
+
+=item * No empty lines in the end of file
+
+=back
 
 In case of errors script outputs friendly information what is wrong.
 
