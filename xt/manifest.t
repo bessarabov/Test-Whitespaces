@@ -11,6 +11,7 @@ ok_manifest(
             qr{samples_with_whitespaces_errors/},
             qr{t_failing/},
             qr{xt/},
+            qr{\.travis\.yml},
         ],
     }
 );
