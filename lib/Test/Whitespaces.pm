@@ -78,6 +78,18 @@ files and directories and `L<whiter>` to fix all that errors.
 And by the way, this module don't have any dependencies, but Perl. It does not
 matter much, but it is nice =)
 
+=head2 FAQ
+
+Q: Why not to use perltidy instead of this module?
+
+A: Perltidy is a great thing. It fixes some whitespaces problems in the Perl
+source code. But sometimes you don't need the whole perltidy possibilities,
+but only want to make your whitespaces accurate. Adding Test::Whitespaces
+to the project affects less than adding perltidy. And with Test::Whitespaces
+you can test and fix not only the Perl source code, but any texts. For
+example, you can make sure that you javasript code has no problems with
+whitespaces or you can fix your texts files.
+
 =head1 SEE ALSO
 
 If this module is not what you need, you may try to look to these modules (but
