@@ -2,3 +2,9 @@ Revision history for Test-Whitespaces
 
 0.01    2013-01-24
         * First public release
+0.02    2013-02-03
+        * In output stripping max lines length to 78 symbols
+        * Using in output standart ASCII symbol
+        * Added SEE ALSO section with similar modules
+        * Added FAQ about Perltidy
+        * Other small fixes in pod
