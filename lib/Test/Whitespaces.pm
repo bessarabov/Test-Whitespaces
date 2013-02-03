@@ -348,7 +348,7 @@ sub _get_diff_line {
 
     $error_line =~ s{\t}{\\t}g;
     $error_line =~ s{\r}{\\r}g;
-    $error_line =~ s{( +)(\n?)$}{"•" x length($1) . $2}eg;
+    $error_line =~ s{( +)(\n?)$}{"_" x length($1) . $2}eg;
     $error_line =~ s{\n}{\\n}g;
 
     return "# L$line_number $error_line\n";

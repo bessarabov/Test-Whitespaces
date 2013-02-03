@@ -16,7 +16,7 @@ my @test_cases = (
     {
         got => " \n",
         expected => "\n",
-        diff => "# L1 •\\n\n",
+        diff => "# L1 _\\n\n",
     },
     {
         got => "a\tb",
@@ -26,12 +26,12 @@ my @test_cases = (
     {
         got => "a\nb \n",
         expected => "a\nb\n",
-        diff => "# ...\n# L2 b•\\n\n",
+        diff => "# ...\n# L2 b_\\n\n",
     },
     {
         got => "a\nb \nc\nd",
         expected => "a\nb\nc\nd\n",
-        diff => "# ...\n# L2 b•\\n\n# ...\n# L4 d\n",
+        diff => "# ...\n# L2 b_\\n\n# ...\n# L4 d\n",
     },
 );
 
