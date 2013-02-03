@@ -8,10 +8,11 @@ ok_manifest(
     {
         filter => [
             qr{\.git/},
+            qr{\.travis\.yml},
             qr{samples_with_whitespaces_errors/},
+            qr{sbin\/},
             qr{t_failing/},
             qr{xt/},
-            qr{\.travis\.yml},
         ],
     }
 );

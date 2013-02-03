@@ -351,7 +351,23 @@ sub _get_diff_line {
     $error_line =~ s{( +)(\n?)$}{"_" x length($1) . $2}eg;
     $error_line =~ s{\n}{\\n}g;
 
-    return "# L$line_number $error_line\n";
+    my $prefix = "# L$line_number ";
+    my $spacer = "...";
+
+    my $max_length = 78;
+    my $system_length = length($prefix . $spacer);
+    my $max_text_length = $max_length - $system_length;
+
+    my $line = $prefix . $error_line;
+
+    if (length($line) > $max_length) {
+        $error_line =~ /(.{$max_text_length})$/ms;
+        $error_line = $1;
+
+        $line = $prefix . $spacer . $error_line;
+    }
+
+    return $line . "\n";
 }
 
 sub _file_is_in_vcs_index {
