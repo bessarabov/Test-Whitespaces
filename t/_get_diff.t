@@ -33,6 +33,11 @@ my @test_cases = (
         expected => "a\nb\nc\nd\n",
         diff => "# ...\n# L2 b_\\n\n# ...\n# L4 d\n",
     },
+    {
+        got => "1234567890" x 10 . " \n",
+        expected => "1234567890" x 10 . "\n",
+        diff => "# L1 ...4567890" . "1234567890" x 6 . "_\\n\n",
+    },
 );
 
 foreach (@test_cases) {
