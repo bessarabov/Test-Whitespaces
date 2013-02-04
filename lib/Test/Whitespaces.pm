@@ -264,6 +264,18 @@ sub _done_testing {
     print "1..$current_test\n";
 };
 
+sub _print_red {
+    my ($text) = @_;
+
+    if (-t STDOUT) {
+        print RED();
+        print $text;
+        print RESET();
+    } else {
+        print $text;
+    }
+}
+
 sub _read_file {
     my ($filename) = @_;
 
