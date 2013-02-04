@@ -11,32 +11,32 @@ my @test_cases = (
     {
         got => "",
         expected => "\n",
-        diff => "# L1\n",
+        diff => "# line 1\n",
     },
     {
         got => " \n",
         expected => "\n",
-        diff => "# L1 _\\n\n",
+        diff => "# line 1: _\\n\n",
     },
     {
         got => "a\tb",
         expected => "a    b\n",
-        diff => "# L1 a\\tb\n",
+        diff => "# line 1: a\\tb\n",
     },
     {
         got => "a\nb \n",
         expected => "a\nb\n",
-        diff => "# ...\n# L2 b_\\n\n",
+        diff => "# ...\n# line 2: b_\\n\n",
     },
     {
         got => "a\nb \nc\nd",
         expected => "a\nb\nc\nd\n",
-        diff => "# ...\n# L2 b_\\n\n# ...\n# L4 d\n",
+        diff => "# ...\n# line 2: b_\\n\n# ...\n# line 4: d\n",
     },
     {
         got => "1234567890" x 10 . " \n",
         expected => "1234567890" x 10 . "\n",
-        diff => "# L1 ...4567890" . "1234567890" x 6 . "_\\n\n",
+        diff => "# line 1: ...90" . "1234567890" x 6 . "_\\n\n",
     },
 );
 

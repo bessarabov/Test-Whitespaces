@@ -312,7 +312,7 @@ sub _get_diff {
     croak "Expected 'expected'. Stopped" if not defined $expected;
 
     if ($got eq "") {
-        return "# L1\n";
+        return "# line 1\n";
     }
 
     my $diff = '';
@@ -356,14 +356,14 @@ sub _get_diff {
 sub _get_diff_line {
     my ($line_number, $error_line) = @_;
 
-    return "# L$line_number\n" if not defined $error_line;
+    return "# line $line_number\n" if not defined $error_line;
 
     $error_line =~ s{\t}{\\t}g;
     $error_line =~ s{\r}{\\r}g;
     $error_line =~ s{( +)(\n?)$}{"_" x length($1) . $2}eg;
     $error_line =~ s{\n}{\\n}g;
 
-    my $prefix = "# L$line_number ";
+    my $prefix = "# line $line_number: ";
     my $spacer = "...";
 
     my $max_length = 78;
