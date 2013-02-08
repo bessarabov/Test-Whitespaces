@@ -256,7 +256,7 @@ sub _is {
         print "ok $current_test - $text\n";
     } else {
         print "not ok $current_test - $text\n";
-        print _get_diff($got, $expected);
+        _print_diff($got, $expected);
     }
 }
 
@@ -317,14 +317,15 @@ sub _get_fixed_text {
     return $fixed_text;
 }
 
-sub _get_diff {
+sub _print_diff {
     my ($got, $expected) = @_;
 
     croak "Expected 'got'. Stopped" if not defined $got;
     croak "Expected 'expected'. Stopped" if not defined $expected;
 
     if ($got eq "") {
-        return "# line 1\n";
+        print "# line 1\n";
+        return $false;
     }
 
     my $diff = '';
@@ -354,21 +355,21 @@ sub _get_diff {
     foreach my $line_number (sort {$a <=> $b} keys %error_lines) {
 
         if ($previous_line_number + 1 != $line_number) {
-            $diff .= "# ...\n";
+            print "# ...\n";
         }
 
-        $diff .= _get_diff_line($line_number, $error_lines{$line_number});
+        _print_diff_line($line_number, $error_lines{$line_number});
 
         $previous_line_number = $line_number;
     }
 
-    return $diff;
+    return $false;
 }
 
-sub _get_diff_line {
+sub _print_diff_line {
     my ($line_number, $error_line) = @_;
 
-    return "# line $line_number\n" if not defined $error_line;
+    print "# line $line_number\n" if not defined $error_line;
 
     $error_line =~ s{\t}{\\t}g;
     $error_line =~ s{\r}{\\r}g;
@@ -391,7 +392,9 @@ sub _get_diff_line {
         $line = $prefix . $spacer . $error_line;
     }
 
-    return $line . "\n";
+    print($line . "\n");
+
+    return $false;
 }
 
 sub _file_is_in_vcs_index {

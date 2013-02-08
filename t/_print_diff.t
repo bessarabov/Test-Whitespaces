@@ -46,10 +46,17 @@ foreach (@test_cases) {
         $_->{expected},
         "_get_fixed_text()",
     );
+
+    my $stdout;
+    {
+        open (local *STDOUT,'>:utf8',\($stdout="\x{FEFF}"));
+        Test::Whitespaces::_print_diff($_->{got}, $_->{expected});
+    };
+
     is(
-        Test::Whitespaces::_get_diff($_->{got}, $_->{expected}),
+        $stdout,
         $_->{diff},
-        "_get_diff()",
+        "_print_diff()",
     );
 }
 
