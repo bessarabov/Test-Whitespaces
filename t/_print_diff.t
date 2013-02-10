@@ -11,7 +11,7 @@ my @test_cases = (
     {
         got => "",
         expected => "\n",
-        diff => "# line 1\n",
+        diff => "# line 1 No \\n on line\n",
     },
     {
         got => " \n",

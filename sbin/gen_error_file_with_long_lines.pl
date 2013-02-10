@@ -11,7 +11,6 @@
 use strict;
 use warnings FATAL => 'all';
 use 5.010;
-use DDP;
 use Carp;
 use lib::abs qw(./lib);
 use File::Slurp;

@@ -255,7 +255,8 @@ sub _is {
     if ($got eq $expected) {
         print "ok $current_test - $text\n";
     } else {
-        print "not ok $current_test - $text\n";
+        _print_red("not ok");
+        print " $current_test - $text\n";
         _print_diff($got, $expected);
     }
 }
@@ -324,7 +325,10 @@ sub _print_diff {
     croak "Expected 'expected'. Stopped" if not defined $expected;
 
     if ($got eq "") {
-        print "# line 1\n";
+        print "# line 1 ";
+        _print_red("No \\n on line");
+        print "\n";
+
         return $false;
     }
 
@@ -369,32 +373,121 @@ sub _print_diff {
 sub _print_diff_line {
     my ($line_number, $error_line) = @_;
 
-    print "# line $line_number\n" if not defined $error_line;
+    if (not defined $error_line) {
 
-    $error_line =~ s{\t}{\\t}g;
-    $error_line =~ s{\r}{\\r}g;
-    $error_line =~ s{( +)(\n?)$}{"_" x length($1) . $2}eg;
-    $error_line =~ s{\n}{\\n}g;
+        croak "Internal error. We should not be here."; # TODO bes
+
+        print "# line $line_number ";
+        _print_red("Empty line in the end of file");
+        print "\n";
+    }
+
+    # array of hashes:
+    # { status => 'correct', text => 'a' },
+    # { status => 'error', text => '__' },
+    # { status => 'correct', text => '\n' },
+    my @parsed_line = _split_error_line($error_line);
 
     my $prefix = "# line $line_number: ";
     my $spacer = "...";
-
     my $max_length = 78;
     my $system_length = length($prefix . $spacer);
     my $max_text_length = $max_length - $system_length;
 
-    my $line = $prefix . $error_line;
+    my $line;
+    map { $line .= $_->{text}} @parsed_line;
 
-    if (length($line) > $max_length) {
-        $error_line =~ /(.{$max_text_length})$/ms;
-        $error_line = $1;
+    my $symbols_to_skip = length($line) - $max_text_length;
 
-        $line = $prefix . $spacer . $error_line;
+    my $skipped_length = 0;
+
+    print $prefix;
+
+    if ($symbols_to_skip > 0) {
+        print $spacer;
     }
 
-    print($line . "\n");
+    foreach (@parsed_line) {
+
+        if ($skipped_length < $symbols_to_skip) {
+            my $removed = substr $_->{text}, 0, ($symbols_to_skip - $skipped_length), '';
+            $skipped_length += length($removed);
+        }
+
+        if ($_->{status} eq 'correct') {
+            print $_->{text};
+        } else {
+            _print_red($_->{text});
+        }
+    }
+    print "\n";
 
     return $false;
+}
+
+sub _split_error_line {
+    my ($error_line) = @_;
+
+    my @parsed_line;
+
+    my $correct_part = '';
+    my $error_part = '';
+
+    # Value of $prev_status can be 'correct' or 'error'
+    my $prev_status = '';
+
+    my $was_change = $false;
+
+    foreach my $i (0..(length($error_line)-1)) {
+        my $symbol = substr($error_line, $i, 1);
+        my $rest = substr($error_line, $i+1);
+
+        if ($symbol eq "\t" or $symbol eq "\r") {
+            $symbol =~ s{\t}{\\t}g;
+            $symbol =~ s{\r}{\\r}g;
+
+            $error_part .= $symbol;
+            if ($prev_status eq 'correct') {
+                $was_change = $true
+            }
+            $prev_status = 'error';
+        } elsif ($symbol =~ / / and $rest =~ /^\s*$/) {
+            $error_part .= "_";
+
+            if ($prev_status eq 'correct') {
+                $was_change = $true
+            }
+            $prev_status = 'error';
+        } else {
+            $symbol =~ s{\n}{\\n}g;
+            $correct_part .= $symbol;
+
+            if ($prev_status eq 'error') {
+                $was_change = $true
+            }
+            $prev_status = 'correct';
+        }
+
+        if ($was_change) {
+            if ($prev_status eq 'error') {
+                push @parsed_line, { status => 'correct', text => $correct_part };
+                $correct_part = '';
+            } elsif ($prev_status eq 'correct') {
+                push @parsed_line, { status => 'error', text => $error_part };
+                $error_part = '';
+            }
+            $was_change = $false;
+        }
+    }
+
+    if ($prev_status eq 'correct') {
+        push @parsed_line, { status => 'correct', text => $correct_part };
+    } elsif ($prev_status eq 'error') {
+        push @parsed_line, { status => 'error', text => $error_part };
+        $error_part = '';
+    }
+
+    return @parsed_line;
 }
 
 sub _file_is_in_vcs_index {
