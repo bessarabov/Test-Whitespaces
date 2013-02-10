@@ -373,13 +373,12 @@ sub _print_diff {
 sub _print_diff_line {
     my ($line_number, $error_line) = @_;
 
-    if (not defined $error_line) {
-
-        croak "Internal error. We should not be here."; # TODO bes
-
-        print "# line $line_number ";
+    if ($error_line eq "\n") {
+        print "# line $line_number \\n ";
         _print_red("Empty line in the end of file");
         print "\n";
+
+        return;
     }
 
     # array of hashes:
