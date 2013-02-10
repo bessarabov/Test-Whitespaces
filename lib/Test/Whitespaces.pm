@@ -25,21 +25,29 @@ Version 0.02
 
 In xt/whitespaces.t:
 
-    use Test::Whitespaces;
-
-Running this test will check all files with the source code in the directories
-bin, lib, t and xt for errors in whitespaces. It will pretty print all the
-errors, so it is easy to fix them (by the way, this module ships with a script
-`L<whiter>` that can automaticly fix all the errors).
-
-You can also customize the test. All parameters are optional.
-
     use Test::Whitespaces {
-        dirs => [ 'script', 'lib' ], # Directories to check all the files from
-        files => [ 'README' ],       # Additional files to check
-        ignore => [ qr{\.bak$} ],    # Array with regexpex. Files that matches
-                                     # that regexp are not checked
+
+        # Directories to check all the files from
+        dirs => [ 'lib', 'bin', 't' ],
+
+        # Files to be checekd (if you don't need to check the whole dir)
+        files => [ 'README' ],
+
+        # Files that matches any of this regexp will not be checked
+        ignore => [ qr{\.bak$} ],
+
     };
+
+This test will check all the files specified. It will pretty print all the
+errors, so it is easy to undestand where is the problem.
+
+This modules ships with the script `L<whiter>` that can fix all errors.
+
+This module is also shipeed with the script `L<test_whitespaces>` that you can
+use to check source code without writing your custom test file.
+
+All parameters are optional, but you need to specify at least one file to
+check.
 
 =head2 DESCRIPTION
 
@@ -65,9 +73,9 @@ This module checks that all the rules are followed.
 This module don't export any subroutines, you only need to write a test file
 and write there:
 
-    use Test::Whitespaces;
+    use Test::Whitespaces { dirs => ['lib'] };
 
-More complex usage can be found in SYNOPSIS section.
+Full description of the parameters is written in the SYNOPSIS section.
 
 This module does not check the files that are stored in the version control
 system directories (you remember, that .git, .svn and friends).
@@ -89,6 +97,14 @@ to the project affects less than adding perltidy. And with Test::Whitespaces
 you can test and fix not only the Perl source code, but any texts. For
 example, you can make sure that you javasript code has no problems with
 whitespaces or you can fix your texts files.
+
+Q: Why there is no default values?
+
+A: The idea behind this test is to make delelopers work simplier. There are a
+lot of things a developer should remember. I don't want to ask developers to
+remember the default values of this module. The person writing test should
+write the exact list of thing to check, but such precise writing simplifies
+the work of person who reads the code.
 
 =head1 SEE ALSO
 
@@ -160,12 +176,7 @@ sub import {
     }
 
     if (not defined $args->{dirs}) {
-        $args->{dirs} = [
-            "$Bin/../bin",
-            "$Bin/../lib",
-            "$Bin/../t",
-            "$Bin/../xt",
-        ],
+        $args->{dirs} = [],
     }
 
     if (not defined $args->{files}) {
