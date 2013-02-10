@@ -23,7 +23,7 @@ use File::Slurp;
 sub main {
     my $content;
 
-    foreach my $n (65..80) {
+    foreach my $n (61..66) {
         my $string = "x"x($n - 4);
         $content .= "$n $string \n";
     }
