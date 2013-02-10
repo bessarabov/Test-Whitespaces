@@ -2,7 +2,7 @@ NAME
     Test::Whitespaces - test source code for errors in whitespaces
 
 VERSION
-    Version 0.02
+    Version 0.03
 
 SYNOPSIS
     In xt/whitespaces.t:

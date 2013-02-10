@@ -8,3 +8,9 @@ Revision history for Test-Whitespaces
         * Added SEE ALSO section with similar modules
         * Added FAQ about Perltidy
         * Other small fixes in pod
+0.03    2013-02-10
+        * Whitespaces errors output in color
+        * Removed default values and wrote faq about it
+        * Parameter --only_errors in script test_whitespaces
+        * Writing the word "line" instead of obscure "L"
+        * Other small improvements of output format
