@@ -2,6 +2,7 @@
 
 use strict;
 use warnings;
+use utf8;
 
 use Test::More;
 
@@ -37,6 +38,11 @@ my @test_cases = (
         got => "1234567890" x 10 . " \n",
         expected => "1234567890" x 10 . "\n",
         diff => "# line 1: ...90" . "1234567890" x 6 . "_\\n\n",
+    },
+    {
+        got => "абвгдеёжзи" x 10 . " \n",
+        expected => "абвгдеёжзи" x 10 . "\n",
+        diff => "# line 1: ...зи" . "абвгдеёжзи" x 6 . "_\\n\n",
     },
 );
 
