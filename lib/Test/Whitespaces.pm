@@ -157,6 +157,7 @@ my $false = '';
 
 my $current_test = 0;
 my $verbose = $false;
+my $print_ok_files = $true;
 my @ignore;
 
 sub import {
@@ -216,6 +217,11 @@ sub _run_script {
         }
 
         if (not $seen_two_minuses) {
+            if ($args{script} eq 'test_whitespaces' and $argv eq '--only_errors') {
+                $print_ok_files = $false;
+                next;
+            }
+
             if ($argv eq '--help') {
                 pod2usage({
                     -exitval => 0,
@@ -264,7 +270,9 @@ sub _is {
     $current_test++;
 
     if ($got eq $expected) {
-        print "ok $current_test - $text\n";
+        if ($print_ok_files) {
+            print "ok $current_test - $text\n";
+        }
     } else {
         _print_red("not ok");
         print " $current_test - $text\n";

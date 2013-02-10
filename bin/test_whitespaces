@@ -12,6 +12,7 @@ test_whitespaces [FILEs or DIRs or both]
 
  Options:
 
+      --only_errors     Script will output only errors
       --help            Show this message
       --version         Show version number
 
