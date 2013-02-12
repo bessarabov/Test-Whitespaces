@@ -84,6 +84,7 @@ SEE ALSO
 
     * Test::EOL
     * Test::NoTabs
+    * Test::Tabs
     * Test::TrailingSpace
 
 AUTHOR

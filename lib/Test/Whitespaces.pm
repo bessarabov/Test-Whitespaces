@@ -117,6 +117,8 @@ I hope you will prefer to use Test::Whitespaces):
 
 =item * L<Test::NoTabs>
 
+=item * L<Test::Tabs>
+
 =item * L<Test::TrailingSpace>
 
 =back
