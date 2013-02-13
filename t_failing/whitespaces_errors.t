@@ -6,5 +6,6 @@ use Test::Whitespaces {
     )],
     ignore => [
         qr/Bar2/,
+        qr/file_with_tabs/,
     ],
 };
