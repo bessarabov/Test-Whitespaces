@@ -1,4 +1,4 @@
-t_failing/whitespaces_errors.t .. 
+t_failing/default.t .. 
 not ok 1 - whitespaces in samples_with_whitespaces_errors/Bar.pm
 # line 1: package Bar;_\n
 # ...
@@ -37,7 +37,7 @@ Failed 5/5 subtests
 
 Test Summary Report
 -------------------
-t_failing/whitespaces_errors.t (Wstat: 0 Tests: 5 Failed: 5)
+t_failing/default.t (Wstat: 0 Tests: 5 Failed: 5)
   Failed tests:  1-5
 
 Result: FAIL
