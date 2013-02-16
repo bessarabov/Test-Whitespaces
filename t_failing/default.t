@@ -8,5 +8,6 @@ use Test::Whitespaces {
         qr/Bar2/,
         qr/Correct\.pm/,
         qr/file_with_tabs/,
+        qr/unicode/,
     ],
 };

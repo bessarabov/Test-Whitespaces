@@ -162,6 +162,8 @@ my $verbose = $false;
 my $print_ok_files = $true;
 my @ignore;
 
+binmode STDOUT, ":utf8";
+
 sub import {
     my ($class, $args) = @_;
 
@@ -301,7 +303,7 @@ sub _print_red {
 sub _read_file {
     my ($filename) = @_;
 
-    open FILE, "<", $filename or croak "Can't open file '$filename': $!. Stopped";
+    open FILE, "< :encoding(UTF-8)", $filename or croak "Can't open file '$filename': $!. Stopped";
     my @lines = <FILE>;
     close FILE;
 
