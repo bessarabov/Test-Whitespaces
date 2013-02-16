@@ -2,6 +2,6 @@
 
 use Test::Whitespaces {
     files => [qw(
-        samples_with_whitespaces_errors/file_with_tabs
+        samples_with_whitespaces_errors/tabs
     )],
 };

@@ -1,13 +1,18 @@
 use strict;
-use warnings;
+use warnings FATAL => 'all';
 
+use Carp;
 use Test::Differences;
 use File::Slurp;
-
 use Test::More tests => 1;
 
+use lib::abs qw(
+    .
+);
+use Utils;
+
 sub main {
-    my $data = read_file('xt/data/prove_output_tabs');
+    my $data = Utils::convert_data_section(<DATA>);
 
     my $output = `prove -Ilib -v t_failing/tabs.t`;
 
@@ -26,3 +31,11 @@ sub main {
 }
 
 main();
+__DATA__
+t_failing/tabs.t ..\s
+ok 1 - whitespaces in samples_with_whitespaces_errors/file_with_tabs
+1..1
+ok
+All tests successful.
+
+Result: PASS
