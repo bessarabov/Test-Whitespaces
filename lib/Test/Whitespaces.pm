@@ -315,7 +315,7 @@ sub _read_file {
 sub _write_file {
     my ($filename, $content) = @_;
 
-    open FILE, ">", $filename or croak "Can't open file '$filename': $!. Stopped";
+    open FILE, "> :encoding(UTF-8)", $filename or croak "Can't open file '$filename': $!. Stopped";
     print FILE $content;
     close FILE;
 
