@@ -62,5 +62,4 @@ Test::Whitespaces::_run_script(
     script => 'whiter',
     dir => \&Test::Whitespaces::_fix_dir,
     file => \&Test::Whitespaces::_fix_file,
-    argv => \@ARGV,
 );

@@ -22,6 +22,7 @@ WriteMakefile(
         'Pod::Usage' => 0,
         'Term::ANSIColor' => 0,
         'Test::More' => 0,
+        'Getopt::Long' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Test-Whitespaces-*' },

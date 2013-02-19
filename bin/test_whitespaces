@@ -62,5 +62,4 @@ Test::Whitespaces::_run_script(
     script => 'test_whitespaces',
     dir => \&Test::Whitespaces::_check_dir,
     file => \&Test::Whitespaces::_check_file,
-    argv => \@ARGV,
 );
