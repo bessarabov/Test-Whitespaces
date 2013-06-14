@@ -106,3 +106,5 @@ LICENSE AND COPYRIGHT
     by the Free Software Foundation; or the Artistic License.
 
     See http://dev.perl.org/licenses/ for more information.
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/031abc2810e585c4297222a8f2721be6 "githalytics.com")](http://githalytics.com/bessarabov/Test-Whitespaces)
