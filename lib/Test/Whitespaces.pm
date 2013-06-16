@@ -99,7 +99,7 @@ but only want to make your whitespaces accurate. Adding Test::Whitespaces
 to the project affects less than adding perltidy. And with Test::Whitespaces
 you can test and fix not only the Perl source code, but any texts. For
 example, you can make sure that you javasript code has no problems with
-whitespaces or you can fix your texts files.
+whitespaces or you can fix your text files.
 
 Q: Why there is no default values?
 
