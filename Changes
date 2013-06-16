@@ -14,3 +14,10 @@ Revision history for Test-Whitespaces
         * Parameter --only_errors in script test_whitespaces
         * Writing the word "line" instead of obscure "L"
         * Other small improvements of output format
+0.04    2013-06-16
+        * Fixing utf8 bug. RT-85579
+        * Better unicode support
+        * Using Getopt::Long
+        * File README is renamed to README.md and completly rewritten
+        * Added link to the module Test::Tabs in SEE ALSO
+        * Tests are refactored and new tests are added

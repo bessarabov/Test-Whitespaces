@@ -22,7 +22,7 @@ Test::Whitespaces - test source code for errors in whitespaces
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =head1 SYNOPSIS
 
@@ -163,7 +163,7 @@ See http://dev.perl.org/licenses/ for more information.
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 my $true = 1;
 my $false = '';
