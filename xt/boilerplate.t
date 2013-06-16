@@ -1,7 +1,10 @@
-#!perl -T
+#!/usr/bin/perl
 
 use strict;
-use warnings;
+use warnings FATAL => 'all';
+use utf8;
+use open qw(:std :utf8);
+
 use Test::More tests => 3;
 
 sub not_in_file_ok {

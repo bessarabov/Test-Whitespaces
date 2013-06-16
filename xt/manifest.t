@@ -1,7 +1,9 @@
-#!perl -T
+#!/usr/bin/perl
 
 use strict;
-use warnings;
+use warnings FATAL => 'all';
+use utf8;
+use open qw(:std :utf8);
 
 use Test::CheckManifest 0.9;
 ok_manifest(
