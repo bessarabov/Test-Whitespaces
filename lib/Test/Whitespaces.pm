@@ -52,7 +52,7 @@ use to check source code without writing your custom test file.
 All parameters are optional, but you need to specify at least one file to
 check.
 
-=head2 DESCRIPTION
+=head1 DESCRIPTION
 
 This module is intend to solve one simple task: to make sure that your source
 code don't have problems with whitespaces.
@@ -89,7 +89,7 @@ files and directories and `L<whiter>` to fix all that errors.
 And by the way, this module don't have any dependencies, but Perl. It does not
 matter much, but it is nice =)
 
-=head2 FAQ
+=head1 FAQ
 
 Q: Why not to use perltidy instead of this module?
 
