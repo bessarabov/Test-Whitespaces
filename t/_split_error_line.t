@@ -1,3 +1,10 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use utf8;
+use open qw(:std :utf8);
+
 use Test::More;
 
 use Test::Whitespaces { _only_load => 1 };
