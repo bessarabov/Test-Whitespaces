@@ -130,6 +130,14 @@ I hope you will prefer to use Test::Whitespaces):
 
 Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
 
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item * Rob Hoelz (RHOELZ)
+
+=back
+
 =head1 SOURCE CODE
 
 The source code for this module and scripts is hosted on GitHub
