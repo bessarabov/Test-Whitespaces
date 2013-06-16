@@ -2,6 +2,8 @@ package Test::Whitespaces;
 
 use warnings;
 use strict;
+use utf8;
+use open qw(:std :utf8);
 
 use Carp;
 use Cwd qw(realpath);
@@ -162,8 +164,6 @@ my $current_test = 0;
 my $verbose = $false;
 my $print_ok_files = $true;
 my @ignore;
-
-binmode STDOUT, ":utf8";
 
 sub import {
     my ($class, $args) = @_;

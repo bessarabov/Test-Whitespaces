@@ -3,10 +3,13 @@
 use strict;
 use warnings;
 use utf8;
+use open qw(:std :utf8);
 
 use Test::More;
 
 use Test::Whitespaces { _only_load => 1 };
+
+pass("Loaded ok. Perl version $^V");
 
 my @test_cases = (
     {
@@ -53,10 +56,12 @@ foreach (@test_cases) {
         "_get_fixed_text()",
     );
 
-    my $stdout;
-    {
-        open (local *STDOUT,'>:utf8',\($stdout="\x{FEFF}"));
+    my $stdout = do {
+        my $msg;
+        open local(*STDOUT), '>', \$msg or die $!;
         Test::Whitespaces::_print_diff($_->{got}, $_->{expected});
+        utf8::decode($msg);
+        $msg;
     };
 
     is(
