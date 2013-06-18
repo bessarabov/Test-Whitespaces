@@ -57,7 +57,7 @@ foreach (@test_cases) {
     );
 
     my $stdout = do {
-        my $msg;
+        my $msg = '';
         open local(*STDOUT), '>', \$msg or die $!;
         Test::Whitespaces::_print_diff($_->{got}, $_->{expected});
         $msg;
