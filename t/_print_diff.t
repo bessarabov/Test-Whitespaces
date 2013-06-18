@@ -60,9 +60,9 @@ foreach (@test_cases) {
         my $msg;
         open local(*STDOUT), '>', \$msg or die $!;
         Test::Whitespaces::_print_diff($_->{got}, $_->{expected});
-        utf8::decode($msg);
         $msg;
     };
+    utf8::decode($stdout);
 
     is(
         $stdout,
