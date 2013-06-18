@@ -24,3 +24,10 @@ Revision history for Test::Whitespaces
         * File README is renamed to README.md and completly rewritten
         * Added link to the module Test::Tabs in SEE ALSO
         * Tests are refactored and new tests are added
+
+0.05    2013-06-18
+        * Fixing unicode problem in test _print_diff()
+        * Switched to Dist::Zilla
+        * Small format changes in the file Changes
+        * Fixing warning in t/_print_diff in perl-5.8.9
+        * Small changes in pod
