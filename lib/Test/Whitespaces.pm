@@ -1,5 +1,7 @@
 package Test::Whitespaces;
 
+# ABSTRACT: test source code for errors in whitespaces
+
 use warnings;
 use strict;
 use utf8;
@@ -15,14 +17,6 @@ use Pod::Usage;
 use Term::ANSIColor qw(:constants);
 
 =encoding UTF-8
-
-=head1 NAME
-
-Test::Whitespaces - test source code for errors in whitespaces
-
-=head1 VERSION
-
-Version 0.04
 
 =head1 SYNOPSIS
 
@@ -126,10 +120,6 @@ I hope you will prefer to use Test::Whitespaces):
 
 =back
 
-=head1 AUTHOR
-
-Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
-
 =head1 CONTRIBUTORS
 
 =over 4
@@ -150,20 +140,7 @@ L<https://github.com/bessarabov/Test-Whitespaces>
 Please report any bugs or feature requests in GitHub Issues
 L<https://github.com/bessarabov/Test-Whitespaces/issues>
 
-
-=head1 LICENSE AND COPYRIGHT
-
-Copyright 2013 Ivan Bessarabov.
-
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
-
 =cut
-
-our $VERSION = '0.04';
 
 my $true = 1;
 my $false = '';
@@ -235,7 +212,7 @@ sub _run_script {
     }
 
     if ($opt->{version}) {
-        print "$args{script} $VERSION\n";
+        print "$args{script} $Test::Whitespaces::VERSION\n";
         exit 0;
     }
 

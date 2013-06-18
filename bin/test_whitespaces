@@ -1,10 +1,9 @@
 #!/usr/bin/perl
 
+# PODNAME: test_whitespaces
+# ABSTRACT: script to check files for errors in whitespaces
+
 =encoding UTF-8
-
-=head1 NAME
-
-test_whitespaces - script to check files for errors in whitespaces
 
 =head1 SYNOPSIS
 
@@ -39,12 +38,6 @@ In case of errors script outputs friendly information what is wrong.
 
 There is also a script `L<whiter>` that can fix all that errors and there is a
 Perl module L<Test::Whitespaces> that can be used to test your source code.
-
-Project url: L<https://github.com/bessarabov/Test-Whitespaces>
-
-=head1 AUTHOR
-
-Ivan Bessarabov, C<< <ivan@bessarabov.ru> >>
 
 =head1 SOURCE CODE
 
