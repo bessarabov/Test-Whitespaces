@@ -15,4 +15,10 @@ Or you can always write me email to ivan@bessarabov.ru
  [cpan]: https://metacpan.org/module/Test::Whitespaces
  [ghi]: https://github.com/bessarabov/Test-Whitespaces/issues
 
+## Docs
+
+I've written a blog post about this module:
+
+ * http://blogs.perl.org/users/ivan_bessarabov/2013/02/test-whitespaces.html
+
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/031abc2810e585c4297222a8f2721be6 "githalytics.com")](http://githalytics.com/bessarabov/Test-Whitespaces)
