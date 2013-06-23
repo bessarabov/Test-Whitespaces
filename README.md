@@ -17,8 +17,9 @@ Or you can always write me email to ivan@bessarabov.ru
 
 ## Docs
 
-I've written a blog post about this module:
+I've written several posts about this module:
 
  * http://blogs.perl.org/users/ivan_bessarabov/2013/02/test-whitespaces.html
+ * http://thread.gmane.org/gmane.comp.lang.perl.perl-mongers.moscow/12999
 
 [![githalytics.com alpha](https://cruel-carlota.pagodabox.com/031abc2810e585c4297222a8f2721be6 "githalytics.com")](http://githalytics.com/bessarabov/Test-Whitespaces)
