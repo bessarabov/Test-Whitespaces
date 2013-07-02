@@ -14,7 +14,7 @@ use FindBin qw($Bin);
 use Getopt::Long;
 use List::Util qw(max);
 use Pod::Usage;
-use Term::ANSIColor qw(:constants);
+use Term::ANSIColor qw(colored);
 
 =encoding UTF-8
 
@@ -235,11 +235,10 @@ sub _run_script {
         } elsif (-T $argv) {
             $args{file}->($argv);
         } else {
-            print
-                RED
-                . "Fatal error. '$argv' is not a directory and it is not a text file.\n"
-                . RESET
-                ;
+            print _colored(
+                "Fatal error. '$argv' is not a directory and it is not a text file.\n",
+                "red"
+            );
             exit 1;
         }
     }
@@ -256,7 +255,7 @@ sub _is {
             print "ok $current_test - $text\n";
         }
     } else {
-        _print_red("not ok");
+        print _colored("not ok", "red");
         print " $current_test - $text\n";
         _print_diff($got, $expected);
     }
@@ -266,15 +265,13 @@ sub _done_testing {
     print "1..$current_test\n";
 };
 
-sub _print_red {
-    my ($text) = @_;
+sub _colored {
+    my ($text, $color) = @_;
 
     if (-t STDOUT) {
-        print RED();
-        print $text;
-        print RESET();
+        return colored($text, $color);
     } else {
-        print $text;
+        return $text;
     }
 }
 
@@ -327,7 +324,7 @@ sub _print_diff {
 
     if ($got eq "") {
         print "# line 1 ";
-        _print_red("No \\n on line");
+        print _colored("No \\n on line", "red");
         print "\n";
 
         return $false;
@@ -376,7 +373,7 @@ sub _print_diff_line {
 
     if ($error_line eq "\n") {
         print "# line $line_number \\n ";
-        _print_red("Empty line in the end of file");
+        print _colored("Empty line in the end of file", "red");
         print "\n";
 
         return;
@@ -417,7 +414,7 @@ sub _print_diff_line {
         if ($_->{status} eq 'correct') {
             print $_->{text};
         } else {
-            _print_red($_->{text});
+            print _colored($_->{text});
         }
     }
     print "\n";
