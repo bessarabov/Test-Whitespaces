@@ -257,7 +257,7 @@ sub _is {
     } else {
         print _colored("not ok", "red");
         print " $current_test - $text\n";
-        _print_diff($got, $expected);
+        print _get_diff($got, $expected);
     }
 }
 
@@ -316,18 +316,20 @@ sub _get_fixed_text {
     return $fixed_text;
 }
 
-sub _print_diff {
+sub _get_diff {
     my ($got, $expected) = @_;
 
     croak "Expected 'got'. Stopped" if not defined $got;
     croak "Expected 'expected'. Stopped" if not defined $expected;
 
-    if ($got eq "") {
-        print "# line 1 ";
-        print _colored("No \\n on line", "red");
-        print "\n";
+    my $return;
 
-        return $false;
+    if ($got eq "") {
+        $return .= "# line 1 ";
+        $return .= _colored("No \\n on line", "red");
+        $return .= "\n";
+
+        return $return;
     }
 
     my $diff = '';
@@ -357,15 +359,15 @@ sub _print_diff {
     foreach my $line_number (sort {$a <=> $b} keys %error_lines) {
 
         if ($previous_line_number + 1 != $line_number) {
-            print "# ...\n";
+            $return .= "# ...\n";
         }
 
-        print _get_diff_line($line_number, $error_lines{$line_number});
+        $return .= _get_diff_line($line_number, $error_lines{$line_number});
 
         $previous_line_number = $line_number;
     }
 
-    return $false;
+    return $return;
 }
 
 sub _get_diff_line {
