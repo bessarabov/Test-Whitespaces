@@ -257,7 +257,22 @@ sub _is {
     } else {
         print _colored("not ok", "red");
         print " $current_test - $text\n";
-        print _get_diff($got, $expected);
+        my $diff = _get_diff($got, $expected);
+
+        if ($ENV{HARNESS_ACTIVE}) {
+
+            print STDERR "\n";
+
+            print STDERR "# \n";
+            print STDERR "# Failed check on file '$text':\n";
+            print STDERR "# \n";
+
+            print STDERR $diff;
+            print STDERR "# \n";
+
+        } else {
+            print $diff;
+        }
     }
 }
 
@@ -541,7 +556,7 @@ sub _check_file {
         my $relative_filename = $filename;
         $relative_filename =~ s{^$module_path}{};
 
-        _is($content, $fixed_content, "whitespaces in $relative_filename");
+        _is($content, $fixed_content, "$relative_filename");
     }
 
 }
