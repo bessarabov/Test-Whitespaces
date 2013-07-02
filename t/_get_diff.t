@@ -56,18 +56,12 @@ foreach (@test_cases) {
         "_get_fixed_text()",
     );
 
-    my $stdout = do {
-        my $msg = '';
-        open local(*STDOUT), '>', \$msg or die $!;
-        Test::Whitespaces::_print_diff($_->{got}, $_->{expected});
-        $msg;
-    };
-    utf8::decode($stdout);
+    my $got = Test::Whitespaces::_get_diff($_->{got}, $_->{expected});
 
     is(
-        $stdout,
+        $got,
         $_->{diff},
-        "_print_diff()",
+        "_get_diff()",
     );
 }
 
