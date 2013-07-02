@@ -1,4 +1,6 @@
 language: perl
+install: cpanm --notest File::Slurp Test::Differences lib::abs Capture::Tiny
+script: prove -l xt t
 perl:
   - "5.10"
   - "5.12"
