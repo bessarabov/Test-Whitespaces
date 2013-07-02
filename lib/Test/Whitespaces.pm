@@ -360,7 +360,7 @@ sub _print_diff {
             print "# ...\n";
         }
 
-        _print_diff_line($line_number, $error_lines{$line_number});
+        print _get_diff_line($line_number, $error_lines{$line_number});
 
         $previous_line_number = $line_number;
     }
@@ -368,15 +368,17 @@ sub _print_diff {
     return $false;
 }
 
-sub _print_diff_line {
+sub _get_diff_line {
     my ($line_number, $error_line) = @_;
 
-    if ($error_line eq "\n") {
-        print "# line $line_number \\n ";
-        print _colored("Empty line in the end of file", "red");
-        print "\n";
+    my $diff_line;
 
-        return;
+    if ($error_line eq "\n") {
+        $diff_line .= "# line $line_number \\n ";
+        $diff_line .= _colored("Empty line in the end of file", "red");
+        $diff_line .= "\n";
+
+        return $diff_line;
     }
 
     # array of hashes:
@@ -398,10 +400,10 @@ sub _print_diff_line {
 
     my $skipped_length = 0;
 
-    print $prefix;
+    $diff_line .= $prefix;
 
     if ($symbols_to_skip > 0) {
-        print $spacer;
+        $diff_line .= $spacer;
     }
 
     foreach (@parsed_line) {
@@ -412,14 +414,14 @@ sub _print_diff_line {
         }
 
         if ($_->{status} eq 'correct') {
-            print $_->{text};
+            $diff_line .= $_->{text};
         } else {
-            print _colored($_->{text});
+            $diff_line .= _colored($_->{text});
         }
     }
-    print "\n";
+    $diff_line .= "\n";
 
-    return $false;
+    return $diff_line;
 }
 
 sub _split_error_line {
