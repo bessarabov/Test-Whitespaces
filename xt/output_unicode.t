@@ -9,6 +9,7 @@ use Carp;
 use Test::Differences;
 use File::Slurp;
 use Test::More tests => 1;
+use Capture::Tiny qw(capture_merged);
 
 use lib::abs qw(
     .
@@ -18,7 +19,9 @@ use Utils;
 sub main {
     my $data = Utils::convert_data_section(<DATA>);
 
-    my $output = `prove -Ilib -v t_failing/unicode.t`;
+    my $output = capture_merged {
+        system("prove -Ilib -v t_failing/unicode.t");
+    };
 
     # removing chaning line:
     # Files=1, Tests=5,  0 wallclock secs ( 0.03 usr  0.00 sys +  0.04 cusr  0.02 csys =  0.09 CPU)
