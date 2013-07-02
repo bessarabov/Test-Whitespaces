@@ -34,7 +34,7 @@ sub main {
 main();
 __DATA__
 t_failing/unicode.t ..\s
-not ok 1 - whitespaces in samples_with_whitespaces_errors/unicode
+not ok 1 - samples_with_whitespaces_errors/unicode
 # ...
 # line 5: ...в оттепель, часов в девять утра, поезд Петербургско-Варшавской_\n
 # line 6: ... на всех парах подходил к Петербургу. Было так сыро и туманно,_\n

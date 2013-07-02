@@ -34,7 +34,7 @@ sub main {
 main();
 __DATA__
 t_failing/default.t ..\s
-not ok 1 - whitespaces in samples_with_whitespaces_errors/Bar.pm
+not ok 1 - samples_with_whitespaces_errors/Bar.pm
 # line 1: package Bar;_\n
 # ...
 # line 5: \tmy ($number) = @_;\n
@@ -46,7 +46,7 @@ not ok 1 - whitespaces in samples_with_whitespaces_errors/Bar.pm
 # line 14:     return 2*$number;_\n
 # ...
 # line 18: 1;_
-not ok 2 - whitespaces in samples_with_whitespaces_errors/Dos.pm
+not ok 2 - samples_with_whitespaces_errors/Dos.pm
 # line 1: package Dos;\r\n
 # line 2: \r\n
 # line 3: # In the sub tabs are used instead of spaces\r\n
@@ -54,16 +54,16 @@ not ok 2 - whitespaces in samples_with_whitespaces_errors/Dos.pm
 # line 5: \tmy ($number) = @_;\r\n
 # line 6: }\r\n
 # line 7: 1;\r\n
-not ok 3 - whitespaces in samples_with_whitespaces_errors/empty.pm
+not ok 3 - samples_with_whitespaces_errors/empty.pm
 # line 1 No \n on line
-not ok 4 - whitespaces in samples_with_whitespaces_errors/lines.pm
+not ok 4 - samples_with_whitespaces_errors/lines.pm
 # line 1: 61 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 2: 62 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 3: 63 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 4: ...4 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 5: ... xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 6: ...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
-not ok 5 - whitespaces in samples_with_whitespaces_errors/Foo.pm
+not ok 5 - samples_with_whitespaces_errors/Foo.pm
 # ...
 # line 7 \n Empty line in the end of file
 # line 8 \n Empty line in the end of file

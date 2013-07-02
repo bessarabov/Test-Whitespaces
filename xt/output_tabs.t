@@ -37,7 +37,7 @@ sub main {
 main();
 __DATA__
 t_failing/tabs.t ..\s
-ok 1 - whitespaces in samples_with_whitespaces_errors/file_with_tabs
+ok 1 - samples_with_whitespaces_errors/file_with_tabs
 1..1
 ok
 All tests successful.
