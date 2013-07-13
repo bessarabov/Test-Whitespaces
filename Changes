@@ -31,3 +31,9 @@ Revision history for Test::Whitespaces
         * Small format changes in the file Changes
         * Fixing warning in t/_print_diff in perl-5.8.9
         * Small changes in pod
+
+1.0.0   2013-07-14
+        * Using semver for version numbers
+        * Fixing a bug. Not `prove` without `-v` whill show errors
+        * Explicidly specified that Perl 5.8.0 and above is supported
+        * A lot of changes in tests
