@@ -439,7 +439,7 @@ sub _get_diff_line {
         if ($_->{status} eq 'correct') {
             $diff_line .= $_->{text};
         } else {
-            $diff_line .= _colored($_->{text});
+            $diff_line .= _colored($_->{text}, 'red');
         }
     }
     $diff_line .= "\n";
