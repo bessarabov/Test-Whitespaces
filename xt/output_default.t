@@ -30,14 +30,16 @@ sub main {
     eq_or_diff(
         $output,
         $data,
-        "default settings",
+        "Output is expected",
     );
 }
 
 main();
 __DATA__
-t_failing/default.t ..\s
-not ok 1 - samples_with_whitespaces_errors/Bar.pm
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/Bar.pm':
+#\s
 # line 1: package Bar;_\n
 # ...
 # line 5: \tmy ($number) = @_;\n
@@ -49,7 +51,12 @@ not ok 1 - samples_with_whitespaces_errors/Bar.pm
 # line 14:     return 2*$number;_\n
 # ...
 # line 18: 1;_
-not ok 2 - samples_with_whitespaces_errors/Dos.pm
+#\s
+#\s
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/Dos.pm':
+#\s
 # line 1: package Dos;\r\n
 # line 2: \r\n
 # line 3: # In the sub tabs are used instead of spaces\r\n
@@ -57,19 +64,42 @@ not ok 2 - samples_with_whitespaces_errors/Dos.pm
 # line 5: \tmy ($number) = @_;\r\n
 # line 6: }\r\n
 # line 7: 1;\r\n
-not ok 3 - samples_with_whitespaces_errors/empty.pm
+#\s
+#\s
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/empty.pm':
+#\s
 # line 1 No \n on line
-not ok 4 - samples_with_whitespaces_errors/lines.pm
+#\s
+#\s
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/lines.pm':
+#\s
 # line 1: 61 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 2: 62 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 3: 63 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 4: ...4 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 5: ... xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
 # line 6: ...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx_\n
-not ok 5 - samples_with_whitespaces_errors/Foo.pm
+#\s
+#\s
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/Foo.pm':
+#\s
 # ...
 # line 7 \n Empty line in the end of file
 # line 8 \n Empty line in the end of file
+#\s
+#\s
+t_failing/default.t ..\s
+not ok 1 - samples_with_whitespaces_errors/Bar.pm
+not ok 2 - samples_with_whitespaces_errors/Dos.pm
+not ok 3 - samples_with_whitespaces_errors/empty.pm
+not ok 4 - samples_with_whitespaces_errors/lines.pm
+not ok 5 - samples_with_whitespaces_errors/Foo.pm
 1..5
 Failed 5/5 subtests\s
 

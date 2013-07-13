@@ -30,14 +30,16 @@ sub main {
     eq_or_diff(
         $output,
         $data,
-        "settings for tabs",
+        "Output is expected",
     );
 }
 
 main();
 __DATA__
-t_failing/unicode.t ..\s
-not ok 1 - samples_with_whitespaces_errors/unicode
+
+#\s
+# ## Failed check on file 'samples_with_whitespaces_errors/unicode':
+#\s
 # ...
 # line 5: ...в оттепель, часов в девять утра, поезд Петербургско-Варшавской_\n
 # line 6: ... на всех парах подходил к Петербургу. Было так сыро и туманно,_\n
@@ -47,6 +49,10 @@ not ok 1 - samples_with_whitespaces_errors/unicode
 # line 10: ...деловым, не из очень далека. Все, как водится, устали, у всех_\n
 # line 11: ...ь глаза, все назяблись, все лица были бледно-желтые, под цвет_\n
 # line 12: тумана._\n
+#\s
+#\s
+t_failing/unicode.t ..\s
+not ok 1 - samples_with_whitespaces_errors/unicode
 1..1
 Failed 1/1 subtests\s
 
