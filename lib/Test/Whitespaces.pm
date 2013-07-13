@@ -111,7 +111,7 @@ Unicode support was implemented that is needed for this module.
 Q: What is the logic for version numbering?
 
 A: Test::Whitespaces version numbers uses Semantic Versioning standart.
-Please visit http://semver.org/ to find out all about this great thing.
+Please visit L<http://semver.org/> to find out all about this great thing.
 
 =head1 SEE ALSO
 
