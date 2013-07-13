@@ -262,19 +262,18 @@ sub _is {
     } else {
         print _colored("not ok", "red");
         print " $current_test - $text\n";
-        my $diff = _get_diff($got, $expected);
+        my $diff =
+            "# \n"
+            . "# ## Failed check on file '$text':\n"
+            . "# \n"
+            . _get_diff($got, $expected)
+            . "# \n"
+            . "# \n"
+            ;
 
         if ($ENV{HARNESS_ACTIVE}) {
-
             print STDERR "\n";
-
-            print STDERR "# \n";
-            print STDERR "# Failed check on file '$text':\n";
-            print STDERR "# \n";
-
             print STDERR $diff;
-            print STDERR "# \n";
-
         } else {
             print $diff;
         }
