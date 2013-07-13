@@ -103,6 +103,11 @@ remember the default values of this module. The person writing test should
 write the exact list of thing to check, but such precise writing simplifies
 the work of person who reads the code.
 
+Q: What Perl version do I need to use Test::Whitespaces?
+
+A: This module works with Perl 5.8.0 and above. In Perl 5.8.0 the better
+Unicode support was implemented that is needed for this module.
+
 =head1 SEE ALSO
 
 If this module is not what you need, you may try to look to these modules (but
