@@ -150,6 +150,8 @@ L<https://github.com/bessarabov/Test-Whitespaces/issues>
 my $true = 1;
 my $false = '';
 
+$| = 1;
+
 my $current_test = 0;
 my $verbose = $false;
 my $print_ok_files = $true;
