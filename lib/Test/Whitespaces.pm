@@ -108,6 +108,11 @@ Q: What Perl version do I need to use Test::Whitespaces?
 A: This module works with Perl 5.8.0 and above. In Perl 5.8.0 the better
 Unicode support was implemented that is needed for this module.
 
+Q: What is the logic for version numbering?
+
+A: Test::Whitespaces version numbers uses Semantic Versioning standart.
+Please visit http://semver.org/ to find out all about this great thing.
+
 =head1 SEE ALSO
 
 If this module is not what you need, you may try to look to these modules (but
