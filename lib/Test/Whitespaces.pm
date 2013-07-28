@@ -20,7 +20,8 @@ use Term::ANSIColor qw(colored);
 
 =head1 SYNOPSIS
 
-In xt/whitespaces.t:
+In xt/whitespaces.t (read FAQ section to find out why it is better to place
+test file in xt directory):
 
     use Test::Whitespaces {
 
@@ -112,6 +113,19 @@ Q: What is the logic for version numbering?
 
 A: Test::Whitespaces version numbers uses Semantic Versioning standart.
 Please visit L<http://semver.org/> to find out all about this great thing.
+
+Q: Why is it recomended to put test file in xt directory?
+
+I recomend create test file as xt/whitespaces.t, not t/whitespaces.t.
+Directory `t` stores all the tests that will be run when the user installs
+module from CPAN. If you add testing whitespaces of the module to the `t`
+directory you will need to add dependency Test::Whitespaces to your module.
+But checking whitespaces does matter for the module author, and does not
+matter for the module user. I think that we should simplify module user life
+and not to oblige the user to install Test::Whitespaces. Directory `xt` is for
+extened tests. That tests are run by the module author, but are not run when
+the user installs module from CPAN. So xt directory is the perfect place to
+store file that checks whitespaces.
 
 =head1 SEE ALSO
 
