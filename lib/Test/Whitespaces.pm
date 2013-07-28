@@ -26,26 +26,16 @@ test file in xt directory):
     use Test::Whitespaces {
 
         # Directories to check all the files from
-        dirs => [ 'lib', 'bin', 't' ],
-
-        # Files to be checekd (if you don't need to check the whole dir)
-        files => [ 'README' ],
-
-        # Files that matches any of this regexp will not be checked
-        ignore => [ qr{\.bak$} ],
+        dirs => [
+            'bin',
+            'lib',
+            't',
+        ],
 
     };
 
-This test will check all the files specified. It will pretty print all the
-errors, so it is easy to undestand where is the problem.
-
-This modules ships with the script `L<whiter>` that can fix all errors.
-
-This module is also shipeed with the script `L<test_whitespaces>` that you can
-use to check source code without writing your custom test file.
-
-All parameters are optional, but you need to specify at least one file to
-check.
+The test will check all the files specified by parameters. It will pretty
+print all the errors, so it is easy to undestand where is the problem.
 
 =head1 DESCRIPTION
 
@@ -73,7 +63,20 @@ and write there:
 
     use Test::Whitespaces { dirs => ['lib'] };
 
-Full description of the parameters is written in the SYNOPSIS section.
+Here is the full list of all avaliable parameters:
+
+    use Test::Whitespaces {
+
+        # Directories to check all the files from
+        dirs => [ 'lib', 'bin', 't' ],
+
+        # Files to be checekd (if you don't need to check the whole dir)
+        files => [ 'README' ],
+
+        # Files that matches any of this regexp will not be checked
+        ignore => [ qr{\.bak$} ],
+
+    };
 
 This module does not check the files that are stored in the version control
 system directories (you remember, that .git, .svn and friends).
