@@ -37,3 +37,11 @@ Revision history for Test::Whitespaces
         * Fixing a bug. Not `prove` without `-v` whill show errors
         * Explicidly specified that Perl 5.8.0 and above is supported
         * A lot of changes in tests
+
+1.1.0   2013-07-28
+        [Minor]
+        * Simplified SYNOPSIS section
+        * FAQ section why it is better to create test file in xt directory
+
+        [Patch]
+        * Fixing link markup in pod
