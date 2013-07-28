@@ -20,8 +20,8 @@ use Term::ANSIColor qw(colored);
 
 =head1 SYNOPSIS
 
-In xt/whitespaces.t (read FAQ section to find out why it is better to place
-test file in xt directory):
+In xt/whitespaces.t (read FAQ section to find out why it is recommended to
+place test file in xt directory):
 
     use Test::Whitespaces {
 
@@ -117,7 +117,7 @@ Q: What is the logic for version numbering?
 A: Test::Whitespaces version numbers uses Semantic Versioning standart.
 Please visit L<http://semver.org/> to find out all about this great thing.
 
-Q: Why is it recomended to put test file in xt directory?
+Q: Why it is recommended to place test file in xt directory?
 
 I recomend create test file as xt/whitespaces.t, not t/whitespaces.t.
 Directory `t` stores all the tests that will be run when the user installs
