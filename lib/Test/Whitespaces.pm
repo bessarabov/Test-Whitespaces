@@ -28,6 +28,7 @@ place test file in xt directory):
         # Directories to check all the files from
         dirs => [
             'bin',
+            'examples',
             'lib',
             't',
         ],
