@@ -1,6 +1,6 @@
 # Perl module Test::Whitespaces
 
-The source code for ther Perl module Test::Whitespaces is avaliable on
+The source code for Perl module Test::Whitespaces is avaliable on
 [GitHub][gh].
 
 The compiled and ready to use version of this module is avaliable on
