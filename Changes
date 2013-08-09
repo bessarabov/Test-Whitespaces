@@ -45,3 +45,13 @@ Revision history for Test::Whitespaces
 
         [Patch]
         * Fixing link markup in pod
+
+1.2.0   2013-08-09
+        [Minor]
+        * Added standard directory `examples` to the POD SYNOPSIS
+        * Better POD markup in FAQ section
+        * Added Perl 5.8 to be checked by Travis CI
+
+        [Patch]
+        * Fixing text in SYNOPSIS to match text in FAQ
+        * Fixing misspell
