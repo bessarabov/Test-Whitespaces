@@ -90,9 +90,9 @@ matter much, but it is nice =)
 
 =head1 FAQ
 
-Q: Why not to use perltidy instead of this module?
+=head2 Why not to use perltidy instead of this module?
 
-A: Perltidy is a great thing. It fixes some whitespaces problems in the Perl
+Perltidy is a great thing. It fixes some whitespaces problems in the Perl
 source code. But sometimes you don't need the whole perltidy possibilities,
 but only want to make your whitespaces accurate. Adding Test::Whitespaces
 to the project affects less than adding perltidy. And with Test::Whitespaces
@@ -100,25 +100,25 @@ you can test and fix not only the Perl source code, but any texts. For
 example, you can make sure that you javasript code has no problems with
 whitespaces or you can fix your text files.
 
-Q: Why there is no default values?
+=head2 Why there is no default values?
 
-A: The idea behind this test is to make delelopers work simplier. There are a
+The idea behind this test is to make delelopers work simplier. There are a
 lot of things a developer should remember. I don't want to ask developers to
 remember the default values of this module. The person writing test should
 write the exact list of thing to check, but such precise writing simplifies
 the work of person who reads the code.
 
-Q: What Perl version do I need to use Test::Whitespaces?
+=head2 What Perl version do I need to use Test::Whitespaces?
 
-A: This module works with Perl 5.8.0 and above. In Perl 5.8.0 the better
+This module works with Perl 5.8.0 and above. In Perl 5.8.0 the better
 Unicode support was implemented that is needed for this module.
 
-Q: What is the logic for version numbering?
+=head2 What is the logic for version numbering?
 
-A: Test::Whitespaces version numbers uses Semantic Versioning standart.
+Test::Whitespaces version numbers uses Semantic Versioning standart.
 Please visit L<http://semver.org/> to find out all about this great thing.
 
-Q: Why it is recommended to place test file in xt directory?
+=head2 Why it is recommended to place test file in xt directory?
 
 I recomend create test file as xt/whitespaces.t, not t/whitespaces.t.
 Directory `t` stores all the tests that will be run when the user installs
