@@ -55,3 +55,7 @@ Revision history for Test::Whitespaces
         [Patch]
         * Fixing text in SYNOPSIS to match text in FAQ
         * Fixing misspell
+
+1.2.1   2013-08-12
+        [Patch]
+        * Using word 'whitespace' in POD
