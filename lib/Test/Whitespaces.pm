@@ -92,7 +92,7 @@ matter much, but it is nice =)
 
 =head2 Why not to use perltidy instead of this module?
 
-Perltidy is a great thing. It fixes some whitespaces problems in the Perl
+Perltidy is a great thing. It fixes some whitespace problems in the Perl
 source code. But sometimes you don't need the whole perltidy possibilities,
 but only want to make your whitespaces accurate. Adding Test::Whitespaces
 to the project affects less than adding perltidy. And with Test::Whitespaces
@@ -153,6 +153,8 @@ I hope you will prefer to use Test::Whitespaces):
 =over 4
 
 =item * Rob Hoelz (RHOELZ)
+
+=item * Michael Jemmeson (MJEMMESON)
 
 =back
 
